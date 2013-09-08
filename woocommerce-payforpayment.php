@@ -16,29 +16,34 @@ class Pay4Pay {
 
 	function __construct() {
 		global $woocommerce;
-		load_plugin_textdomain( 'pay4pay' , false, dirname( plugin_basename( __FILE__ )) . '/lang');
-		add_filter('before_woocommerce_init', array($this, 'add_payment_options'));
-		add_action( 'woocommerce_before_calculate_totals', array($this,'add_pay4payment' ) );
-		add_action('woocommerce_review_order_after_submit',array($this,'print_autoload_js'));
+		load_plugin_textdomain( 'pay4pay' , false, dirname( plugin_basename( __FILE__ )) . '/lang' );
+		add_filter( 'before_woocommerce_init' , array($this, 'add_payment_options') );
+		add_action( 'woocommerce_before_calculate_totals' , array($this,'add_pay4payment' ) );
+		add_action( 'woocommerce_review_order_after_submit' , array($this,'print_autoload_js') );
+
 	}
+	
 	
 	function print_autoload_js(){
 		?><script type="text/javascript">
 jQuery(document).ready(function($){
 	$(document.body).on('change', 'input[name="payment_method"]', function() {
 		$('body').trigger('update_checkout');
+		$.ajax( $fragment_refresh );
 	});
 });
  		</script><?php 
 	}
-	function add_pay4payment( $cart_object ) {
+	
+	function add_pay4payment( /*$cart_object*/ ) {
 		global $woocommerce;
 		
 		$available_gateways = $woocommerce->payment_gateways->get_available_payment_gateways();
 		$current_gateway = '';
 		$default_gateway = get_option( 'woocommerce_default_gateway' );
 		if ( ! empty( $available_gateways ) ) {
-			   // Chosen Method
+			
+		   // Chosen Method
 			if ( isset( $woocommerce->session->chosen_payment_method ) && isset( $available_gateways[ $woocommerce->session->chosen_payment_method ] ) ) {
 				$current_gateway = $available_gateways[ $woocommerce->session->chosen_payment_method ];
 			} elseif ( isset( $available_gateways[ $default_gateway ] ) ) {
@@ -46,33 +51,31 @@ jQuery(document).ready(function($){
 			} else {
 				$current_gateway =	current( $available_gateways );
 			}
-		}
-//		$cart_object->calculate_totals();
-		$cost = $current_gateway->settings['pay4pay_charges_fixed'];
-		if ( $percent = $current_gateway->settings['pay4pay_charges_percentage'] ) {
-			var_dump($percent);
-			$subtotal = 0;
-			foreach ( $cart_object->cart_contents as $key => $value ) {
-				$subtotal += $value['data']->price;
-			}
-			if ( $cart_object->prices_include_tax ) {
-				// do something
-			} else {
-				// do something else
-			}
-			$cost += $subtotal * ($percent / 100 );
-		}
 		
-		$taxable = $current_gateway->settings['pay4pay_taxes'] !== 0;
-		if ( $current_gateway->settings['pay4pay_taxes'] == 'incl' ) {
-			$tax = new WC_Tax();
-			$taxrates = array_shift($tax->get_shop_base_rate());
-			$taxrate = floatval( $taxrates['rate']) / 100;
-			$cost = ($cost / (1+$taxrate));
+			if ( isset( $current_gateway->settings['pay4pay_charges_fixed']) ) {
+				$cost = $current_gateway->settings['pay4pay_charges_fixed'];
+				if ( $percent = $current_gateway->settings['pay4pay_charges_percentage'] ) {
+					$subtotal = 0;
+					foreach ( $woocommerce->cart->cart_contents as $key => $value ) {
+						$subtotal += $value['data']->price;
+					}
+					$cost += $subtotal * ($percent / 100 );
+				}
+		
+				$taxable = $current_gateway->settings['pay4pay_taxes'] !== 0;
+				if ( $current_gateway->settings['pay4pay_taxes'] == 'incl' ) {
+					$tax = new WC_Tax();
+					$taxrates = array_shift($tax->get_shop_base_rate());
+					$taxrate = floatval( $taxrates['rate']) / 100;
+					$cost = ($cost / (1+$taxrate));
+				}
+				if ( $cost > 0 ) {
+					$woocommerce->cart->add_fee( $current_gateway->title , $cost, $taxable );
+				}
+			}
 		}
-		if ( $cost > 0 )
-			$woocommerce->cart->add_fee( $current_gateway->title , $cost, $taxable, $tax_class = '' );
 	}
+
 	function add_payment_options( $some ) {
 		global $woocommerce;
 		foreach ( $woocommerce->payment_gateways()->payment_gateways() as $gateway_id => $gateway ) {
@@ -98,11 +101,11 @@ jQuery(document).ready(function($){
 					),
 				),
 				'pay4pay_taxes' => array(
-					'title' => __('Taxes','pay4pay'),
+					'title' => __('Includes Taxes','pay4pay'),
 					'type' => 'select',
 					'description' => __( 'Select an option to handle taxes for the extra charges specified above.', 'pay4pay' ),
 					'options' => array(
-						0 => __( 'No taxes', 'woocommerce' ),
+						0 => __( 'No taxes', 'pay4pay' ),
 						'incl' => __( 'Including tax', 'woocommerce' ),
 						'excl' => __( 'Excluding tax', 'woocommerce' ),
 					),
@@ -114,6 +117,7 @@ jQuery(document).ready(function($){
 		}
 		return $some;
 	}
+	
 	function update_payment_options(  ) {
 		global $woocommerce, $woocommerce_settings, $current_section, $current_tab;
 		$class = new $current_section();
@@ -130,7 +134,6 @@ jQuery(document).ready(function($){
 		$options += $extra;
 		update_option( $opt_name , $options );
 	}
-	// woocommerce_update_options_payment_gateways_{$method}
 	
 }
 

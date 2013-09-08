@@ -1,4 +1,4 @@
-wooCommerce Pay for Payment
+WooCommerce Pay for Payment
 ===========================
 
 About

@@ -1,0 +1,103 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce Pay for Payment v0.0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2013-09-08 16:52:17+0000\n"
+"Last-Translator: admin <joern@flyingletters.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: CSL v1.x\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#. translators: plugin header field 'Name'
+#: woocommerce-payforpayment.php:0
+#@ pay4pay
+msgid "WooCommerce Pay for Payment"
+msgstr ""
+
+#. translators: plugin header field 'PluginURI'
+#: woocommerce-payforpayment.php:0
+#@ pay4pay
+msgid "https://github.com/mcguffin/woocommerce-payforpayment"
+msgstr ""
+
+#. translators: plugin header field 'Description'
+#: woocommerce-payforpayment.php:0
+#@ pay4pay
+msgid "Add extra fees depending on your payment methods."
+msgstr "Extra Gebühren für Zahlungsmethoden festlegen."
+
+#. translators: plugin header field 'Author'
+#: woocommerce-payforpayment.php:0
+#@ pay4pay
+msgid "Jörn Lund"
+msgstr ""
+
+#. translators: plugin header field 'AuthorURI'
+#: woocommerce-payforpayment.php:0
+#@ pay4pay
+msgid "https://github.com/mcguffin"
+msgstr ""
+
+#. translators: plugin header field 'Version'
+#: woocommerce-payforpayment.php:0
+#@ pay4pay
+msgid "0.0.1"
+msgstr ""
+
+#: woocommerce-payforpayment.php:81
+#@ pay4pay
+msgid "Fixed charge"
+msgstr "Feste Gebühr"
+
+#: woocommerce-payforpayment.php:83
+#@ pay4pay
+msgid "Extra charge to be added to cart when this payment method is selected."
+msgstr "Ein fester Betrag für diese Zahlungsweise, der dem Warenkorb hinzugefügt wird."
+
+#: woocommerce-payforpayment.php:91
+#@ pay4pay
+msgid "Percent charge"
+msgstr "Prozentsatz"
+
+#: woocommerce-payforpayment.php:93
+#@ pay4pay
+msgid "Percentage of cart total to be added to payment."
+msgstr "Prozentsatz des Auftragswertes"
+
+#: woocommerce-payforpayment.php:103
+#@ pay4pay
+msgid "Select an option to handle taxes for the extra charges specified above."
+msgstr "Wählen Sie aus ob die Mehrwertsteuer in den genannten Beträgen enthalten ist."
+
+#: woocommerce-payforpayment.php:105
+#@ woocommerce
+msgid "No taxes"
+msgstr ""
+
+#: woocommerce-payforpayment.php:106
+#@ woocommerce
+msgid "Including tax"
+msgstr ""
+
+#: woocommerce-payforpayment.php:107
+#@ woocommerce
+msgid "Excluding tax"
+msgstr ""
+
+#: woocommerce-payforpayment.php:101
+#@ pay4pay
+msgid "Includes Taxes"
+msgstr "Enthält Steuern"
+
