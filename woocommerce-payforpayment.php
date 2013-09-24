@@ -57,11 +57,10 @@ jQuery(document).ready(function($){
 				if ( $percent = $current_gateway->settings['pay4pay_charges_percentage'] ) {
 					$subtotal = 0;
 					foreach ( $woocommerce->cart->cart_contents as $key => $value ) {
-						$subtotal += $value['data']->price;
+						$subtotal += $value['data']->price * $value['quantity'];
 					}
 					$cost += $subtotal * ($percent / 100 );
 				}
-		
 				$taxable = $current_gateway->settings['pay4pay_taxes'] !== 0;
 				if ( $current_gateway->settings['pay4pay_taxes'] == 'incl' ) {
 					$tax = new WC_Tax();
@@ -69,7 +68,7 @@ jQuery(document).ready(function($){
 					$taxrate = floatval( $taxrates['rate']) / 100;
 					$cost = ($cost / (1+$taxrate));
 				}
-				if ( $cost > 0 ) {
+				if ( $cost != 0 ) {
 					$woocommerce->cart->add_fee( $current_gateway->title , $cost, $taxable );
 				}
 			}
