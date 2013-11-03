@@ -69,7 +69,7 @@ jQuery(document).ready(function($){
 					$cost = ($cost / (1+$taxrate));
 				}
 				if ( $cost != 0 ) {
-					$woocommerce->cart->add_fee( $current_gateway->title , $cost, $taxable );
+					$woocommerce->cart->add_fee( $current_gateway->title . ' payment method fees' , $cost, $taxable );
 				}
 			}
 		}
