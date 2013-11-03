@@ -68,8 +68,8 @@ jQuery(document).ready(function($){
 					$taxrate = floatval( $taxrates['rate']) / 100;
 					$cost = ($cost / (1+$taxrate));
 				}
-				if ( $cost != 0 ) {
-					$woocommerce->cart->add_fee( $current_gateway->title , $cost, $taxable );
+				if ( $cost != 0 && !is_page( woocommerce_get_page_id( 'cart' )) ) {
+					$woocommerce->cart->add_fee( $current_gateway->title . ' payment method fees' , $cost, $taxable );
 				}
 			}
 		}
