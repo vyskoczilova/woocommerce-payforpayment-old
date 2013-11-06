@@ -69,7 +69,8 @@ jQuery(document).ready(function($){
 					$cost = ($cost / (1+$taxrate));
 				}
 				if ( $cost != 0 ) {
-					$woocommerce->cart->add_fee( $current_gateway->title , $cost, $taxable );
+					$item_title = isset($current_gateway->settings['pay4pay_item_title']) ? $current_gateway->settings['pay4pay_item_title'] : $current_gateway->title;
+					$woocommerce->cart->add_fee( $item_title , $cost, $taxable );
 				}
 			}
 		}
@@ -79,6 +80,20 @@ jQuery(document).ready(function($){
 		global $woocommerce;
 		foreach ( $woocommerce->payment_gateways()->payment_gateways() as $gateway_id => $gateway ) {
 			$gateway->form_fields += array(
+				'pay4pay_title' => array(
+					'title' => __( 'Extra Charge', 'pay4pay' ),
+					'type' => 'title',
+					'description' => '',
+				),
+				'pay4pay_item_title' => array(
+					'title' => __( 'Item Title', 'pay4pay' ),
+					'type' => 'text',
+					'description' => __( 'This will show up in the shopping basket.', 'pay4pay' ),
+					'default' => $gateway->title,
+					'desc_tip' => true,
+					'custom_attributes' => array(
+					),
+				),
 				'pay4pay_charges_fixed' => array(
 					'title' => __( 'Fixed charge', 'pay4pay' ),
 					'type' => 'number',
@@ -126,6 +141,7 @@ jQuery(document).ready(function($){
 		
 		// validate!
 		$extra = array(
+			'pay4pay_item_title' => sanitize_text_field( $_POST[$prefix.'_pay4pay_item_title'] ),
 			'pay4pay_charges_fixed' => floatval( $_POST[$prefix.'_pay4pay_charges_fixed'] ),
 			'pay4pay_charges_percentage' => floatval( $_POST[$prefix.'_pay4pay_charges_percentage'] ),
 			'pay4pay_taxes' => $_POST[$prefix.'_pay4pay_taxes'], // 0, incl, excl
