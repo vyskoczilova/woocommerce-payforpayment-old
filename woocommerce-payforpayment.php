@@ -68,13 +68,24 @@ jQuery(document).ready(function($){
 					$taxrate = floatval( $taxrates['rate']) / 100;
 					$cost = ($cost / (1+$taxrate));
 				}
-				if ( $cost != 0 ) {
-					$item_title = isset($current_gateway->settings['pay4pay_item_title']) ? $current_gateway->settings['pay4pay_item_title'] : $current_gateway->title;
+				$item_title = isset($current_gateway->settings['pay4pay_item_title']) ? $current_gateway->settings['pay4pay_item_title'] : $current_gateway->title;
+				if ( $cost != 0 && ! $this->cart_has_fee( $woocommerce->cart , $item_title , $cost ) ) {
 					$woocommerce->cart->add_fee( $item_title , $cost, $taxable );
 				}
 			}
 		}
 	}
+
+	function cart_has_fee( &$cart , $item_title , $amount ) {
+		$fees = $cart->get_fees();
+		$item_id = sanitize_title($item_title);
+		$amount = (float) esc_attr( $amount );
+		foreach ( $fees as $fee )
+			if ( $fee->amount == $amount && $fee->id == $item_id )
+				return true;
+		return false;
+	}
+	
 
 	function add_payment_options( $some ) {
 		global $woocommerce;
