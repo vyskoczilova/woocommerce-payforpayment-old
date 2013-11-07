@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce Pay for Payment v0.0.2\n"
+"Project-Id-Version: WooCommerce Pay for Payment v0.0.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2013-11-06 10:23:13+0000\n"
+"PO-Revision-Date: 2013-11-06 10:51:11+0000\n"
 "Last-Translator: admin <joern@flyingletters.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -50,69 +50,69 @@ msgstr ""
 msgid "https://github.com/mcguffin"
 msgstr ""
 
-#: woocommerce-payforpayment.php:98
+#: woocommerce-payforpayment.php:109
 #@ pay4pay
 msgid "Fixed charge"
 msgstr "Feste Gebühr"
 
-#: woocommerce-payforpayment.php:100
+#: woocommerce-payforpayment.php:111
 #@ pay4pay
 msgid "Extra charge to be added to cart when this payment method is selected."
 msgstr "Ein fester Betrag für diese Zahlungsweise, der dem Warenkorb hinzugefügt wird."
 
-#: woocommerce-payforpayment.php:108
+#: woocommerce-payforpayment.php:119
 #@ pay4pay
 msgid "Percent charge"
 msgstr "Prozentsatz"
 
-#: woocommerce-payforpayment.php:110
+#: woocommerce-payforpayment.php:121
 #@ pay4pay
 msgid "Percentage of cart total to be added to payment."
 msgstr "Prozentsatz des Auftragswertes"
 
-#: woocommerce-payforpayment.php:120
+#: woocommerce-payforpayment.php:131
 #@ pay4pay
 msgid "Select an option to handle taxes for the extra charges specified above."
 msgstr "Wählen Sie aus ob die Mehrwertsteuer in den genannten Beträgen enthalten ist."
 
-#: woocommerce-payforpayment.php:122
+#: woocommerce-payforpayment.php:133
 #@ pay4pay
 msgid "No taxes"
 msgstr "Steuerfrei"
 
-#: woocommerce-payforpayment.php:123
+#: woocommerce-payforpayment.php:134
 #@ woocommerce
 msgid "Including tax"
 msgstr ""
 
-#: woocommerce-payforpayment.php:124
+#: woocommerce-payforpayment.php:135
 #@ woocommerce
 msgid "Excluding tax"
 msgstr ""
 
-#: woocommerce-payforpayment.php:118
+#: woocommerce-payforpayment.php:129
 #@ pay4pay
 msgid "Includes Taxes"
 msgstr "Enthält Steuern"
 
-#. translators: plugin header field 'Version'
-#: woocommerce-payforpayment.php:0
-#@ pay4pay
-msgid "0.0.2"
-msgstr ""
-
-#: woocommerce-payforpayment.php:84
+#: woocommerce-payforpayment.php:95
 #@ pay4pay
 msgid "Extra Charge"
 msgstr "Extra Gebühr"
 
-#: woocommerce-payforpayment.php:89
+#: woocommerce-payforpayment.php:100
 #@ pay4pay
 msgid "Item Title"
 msgstr "Bezeichnung"
 
-#: woocommerce-payforpayment.php:91
+#: woocommerce-payforpayment.php:102
 #@ pay4pay
 msgid "This will show up in the shopping basket."
 msgstr "Wird im Warenkorb angezeigt."
+
+#. translators: plugin header field 'Version'
+#: woocommerce-payforpayment.php:0
+#@ pay4pay
+msgid "0.0.3"
+msgstr ""
 

@@ -1,0 +1,118 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce Pay for Payment v0.0.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2013-11-06 17:00+0200\n"
+"Last-Translator: TRFlavourart <trflavourart@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
+"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-Basepath: ../\n"
+"X-Textdomain-Support: yes\n"
+"Language: de_DE\n"
+"X-Poedit-SearchPath-0: .\n"
+
+# @ pay4pay
+#. translators: plugin header field 'Name'
+#: woocommerce-payforpayment.php:0
+msgid "WooCommerce Pay for Payment"
+msgstr "WooCommerce Pay for Payment"
+
+# @ pay4pay
+#. translators: plugin header field 'PluginURI'
+#: woocommerce-payforpayment.php:0
+msgid "https://github.com/mcguffin/woocommerce-payforpayment"
+msgstr "https://github.com/mcguffin/woocommerce-payforpayment"
+
+# @ pay4pay
+#. translators: plugin header field 'Description'
+#: woocommerce-payforpayment.php:0
+msgid "Add extra fees depending on your payment methods."
+msgstr "Ödeme yöntemlerine bağlı olarak ekstra ücret ekleyin."
+
+# @ pay4pay
+#. translators: plugin header field 'Author'
+#: woocommerce-payforpayment.php:0
+msgid "Jörn Lund"
+msgstr "Jörn Lund"
+
+# @ pay4pay
+#. translators: plugin header field 'AuthorURI'
+#: woocommerce-payforpayment.php:0
+msgid "https://github.com/mcguffin"
+msgstr "https://github.com/mcguffin"
+
+# @ pay4pay
+#: woocommerce-payforpayment.php:98
+msgid "Fixed charge"
+msgstr "Sabit Ücret"
+
+# @ pay4pay
+#: woocommerce-payforpayment.php:100
+msgid "Extra charge to be added to cart when this payment method is selected."
+msgstr "Bu ödeme yöntemi seçildiğinde ekstra ücret sepete eklenecek."
+
+# @ pay4pay
+#: woocommerce-payforpayment.php:108
+msgid "Percent charge"
+msgstr "Yüzde Ücreti"
+
+# @ pay4pay
+#: woocommerce-payforpayment.php:110
+msgid "Percentage of cart total to be added to payment."
+msgstr "Sepet toplamının yüzdesi sipariş tutarına eklenecek."
+
+# @ pay4pay
+#: woocommerce-payforpayment.php:120
+msgid "Select an option to handle taxes for the extra charges specified above."
+msgstr ""
+"Yukarıda belirtilen ekstra ücrete K.D.V'nin dahil olup olmadığını belirlemek "
+"bir seçenek seçin."
+
+# @ pay4pay
+#: woocommerce-payforpayment.php:122
+msgid "No taxes"
+msgstr "K.D.V Yok"
+
+# @ woocommerce
+#: woocommerce-payforpayment.php:123
+msgid "Including tax"
+msgstr "K.D.V Dahil"
+
+# @ woocommerce
+#: woocommerce-payforpayment.php:124
+msgid "Excluding tax"
+msgstr "K.D.V Hariç"
+
+# @ pay4pay
+#: woocommerce-payforpayment.php:118
+msgid "Includes Taxes"
+msgstr "K.D.V Dahil"
+
+# @ pay4pay
+#. translators: plugin header field 'Version'
+#: woocommerce-payforpayment.php:0
+msgid "0.0.2"
+msgstr "0.0.2"
+
+# @ pay4pay
+#: woocommerce-payforpayment.php:84
+msgid "Extra Charge"
+msgstr "Ekstra Ücret"
+
+# @ pay4pay
+#: woocommerce-payforpayment.php:89
+msgid "Item Title"
+msgstr "Öğe Başlığı"
+
+# @ pay4pay
+#: woocommerce-payforpayment.php:91
+msgid "This will show up in the shopping basket."
+msgstr "Bu alışveriş sepetinde görünecektir."
