@@ -18,11 +18,9 @@ class Pay4Pay {
 		global $woocommerce;
 		load_plugin_textdomain( 'pay4pay' , false, dirname( plugin_basename( __FILE__ )) . '/lang' );
 		add_filter( 'before_woocommerce_init' , array($this, 'add_payment_options') );
-		add_action( 'woocommerce_calculate_totals' , array($this,'add_pay4payment' ) );
+		add_action( 'woocommerce_before_calculate_totals' , array($this,'add_pay4payment' ) );
 		add_action( 'woocommerce_review_order_after_submit' , array($this,'print_autoload_js') );
-
 	}
-	
 	
 	function print_autoload_js(){
 		?><script type="text/javascript">
@@ -35,7 +33,7 @@ jQuery(document).ready(function($){
  		</script><?php 
 	}
 	
-	function add_pay4payment( /*$cart_object*/ ) {
+	function add_pay4payment( ) {
 		global $woocommerce;
 		
 		$available_gateways = $woocommerce->payment_gateways->get_available_payment_gateways();
@@ -51,7 +49,7 @@ jQuery(document).ready(function($){
 			} else {
 				$current_gateway =	current( $available_gateways );
 			}
-		
+			
 			if ( isset( $current_gateway->settings['pay4pay_charges_fixed']) ) {
 				$cost = $current_gateway->settings['pay4pay_charges_fixed'];
 
@@ -62,13 +60,22 @@ jQuery(document).ready(function($){
 					}
 					$cost += $subtotal * ($percent / 100 );
 				}
-				$taxable = $current_gateway->settings['pay4pay_taxes'] !== 0;
-				if ( $current_gateway->settings['pay4pay_taxes'] == 'incl' ) {
+				if ( ! $current_gateway->settings['pay4pay_taxes'] ) {
+					$taxable = false;
+					$taxes = 0;
+				} else {
+					$taxable = true;
 					$tax = new WC_Tax();
 					$taxrates = array_shift($tax->get_shop_base_rate());
 					$taxrate = floatval( $taxrates['rate']) / 100;
-					$cost = ($cost / (1+$taxrate));
+					if ( $current_gateway->settings['pay4pay_taxes'] == 'incl' ) {
+						$taxes = $cost - ($cost / (1+$taxrate));
+						$cost -= $taxes;
+					} else {
+						$taxes = $cost * $taxrate;
+					}
 				}
+				
 				$item_title = isset($current_gateway->settings['pay4pay_item_title']) ? $current_gateway->settings['pay4pay_item_title'] : $current_gateway->title;
 				if ( $cost != 0 && ! $this->cart_has_fee( $woocommerce->cart , $item_title , $cost ) ) {
 					$woocommerce->cart->add_fee( $item_title , $cost, $taxable );
