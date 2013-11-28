@@ -3,7 +3,7 @@
 Plugin Name: WooCommerce Pay for Payment
 Plugin URI: https://github.com/mcguffin/woocommerce-payforpayment
 Description: Add extra fees depending on your payment methods.
-Version: 0.0.4
+Version: 0.0.5
 Author: Jörn Lund
 Author URI: https://github.com/mcguffin
 
@@ -17,7 +17,7 @@ class Pay4Pay {
 	function __construct() {
 		global $woocommerce;
 		load_plugin_textdomain( 'pay4pay' , false, dirname( plugin_basename( __FILE__ )) . '/lang' );
-		add_filter( 'before_woocommerce_init' , array($this, 'add_payment_options') );
+		add_action( 'woocommerce_init' , array($this, 'add_payment_options') );
 		add_action( 'woocommerce_before_calculate_totals' , array($this,'add_pay4payment' ) );
 		add_action( 'woocommerce_review_order_after_submit' , array($this,'print_autoload_js') );
 	}
@@ -95,7 +95,7 @@ jQuery(document).ready(function($){
 	}
 	
 
-	function add_payment_options( $some ) {
+	function add_payment_options() {
 		global $woocommerce;
 		foreach ( $woocommerce->payment_gateways()->payment_gateways() as $gateway_id => $gateway ) {
 			$gateway->form_fields += array(
@@ -148,7 +148,6 @@ jQuery(document).ready(function($){
 			);
 			add_action( 'woocommerce_update_options_payment_gateways_'.$gateway->id , array($this,'update_payment_options') , 20 );
 		}
-		return $some;
 	}
 	
 	function update_payment_options(  ) {
@@ -172,8 +171,3 @@ jQuery(document).ready(function($){
 }
 
 new Pay4Pay();
-
-
-
-
-?>
