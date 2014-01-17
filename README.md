@@ -11,7 +11,7 @@ Features
 --------
 - Fixed charge and/or a percentage of cart total
 - Translation ready
-- German and Turkish localization ([çok teşekkürler!](https://github.com/TRRF))
+- German, Spanish ([muchas graçias!](https://github.com/GosserBox)) and Turkish localization ([çok teşekkürler!](https://github.com/TRRF))
 
 Compatibility
 -------------
