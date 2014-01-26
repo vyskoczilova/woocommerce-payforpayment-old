@@ -53,11 +53,11 @@ jQuery(document).ready(function($){
 			if ( isset( $current_gateway->settings['pay4pay_charges_fixed']) ) {
 				$cost = $current_gateway->settings['pay4pay_charges_fixed'];
 
+				$subtotal = 0;
+				foreach ( $woocommerce->cart->cart_contents as $key => $value ) {
+					$subtotal += $value['data']->price * $value['quantity'];
+				}
 				if ( $percent = $current_gateway->settings['pay4pay_charges_percentage'] ) {
-					$subtotal = 0;
-					foreach ( $woocommerce->cart->cart_contents as $key => $value ) {
-						$subtotal += $value['data']->price * $value['quantity'];
-					}
 					$cost += $subtotal * ($percent / 100 );
 				}
 				if ( ! $current_gateway->settings['pay4pay_taxes'] ) {
@@ -77,7 +77,11 @@ jQuery(document).ready(function($){
 				}
 				
 				$item_title = isset($current_gateway->settings['pay4pay_item_title']) ? $current_gateway->settings['pay4pay_item_title'] : $current_gateway->title;
-				if ( $cost != 0 && ! $this->cart_has_fee( $woocommerce->cart , $item_title , $cost ) ) {
+				
+				$cost = apply_filters( "woocommerce_pay4pay_{$current_gateway->id}_amount" , $cost , $subtotal , $current_gateway );
+				$do_apply = apply_filters( "woocommerce_pay4pay_applyfor_{$current_gateway->id}" , $cost != 0 , $cost , $subtotal , $current_gateway );
+
+				if ( $do_apply && ! $this->cart_has_fee( $woocommerce->cart , $item_title , $cost ) ) {
 					$woocommerce->cart->add_fee( $item_title , $cost, $taxable );
 				}
 			}

@@ -13,6 +13,39 @@ Features
 - Translation ready
 - German, Spanish ([muchas graçias!](https://github.com/GosserBox)) and Turkish localization ([çok teşekkürler!](https://github.com/TRRF))
 
+Plugin API
+----------
+### Filter `woocommerce_pay4pay_{$current_gateway_id}_amount`: ###
+Applied to the payment gateway fee before it is added to woocomerce' cart.
+
+Usage:
+
+	function my_pay4pay_amount( $amount , $cart_subtotal , $current_payment_gateway ) {
+		if ( my_customer_complained_too_much() )
+			return $amount * 10;
+		else
+			return $amount;
+	}
+	$current_gateway_id = 'cod';
+	add_filter( "woocommerce_pay4pay_{$current_gateway_id}_amount", 'my_pay4pay_amount' , 10 , 3 );
+
+
+### Filter `woocommerce_pay4pay_applyfor_{$current_gateway_id}`: ###
+Handle if a payment fee should be applied.
+
+Usage:
+
+	function my_pay4pay_apply( $do_apply , $amount , $cart_subtotal , $current_payment_gateway ) {
+		if ( my_customer_is_a_nice_guy() )
+			return false;
+		else
+			return $do_apply;
+	}
+	$current_gateway_id = 'cod';
+	add_filter( "woocommerce_pay4pay_applyfor_{$current_gateway_id}", 'my_pay4pay_apply' , 10 , 4 );
+
+
+
 Compatibility
 -------------
 - Developed with WP 3.6 and woocommerce 2.0.14
