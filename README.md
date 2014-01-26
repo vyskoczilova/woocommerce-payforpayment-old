@@ -18,7 +18,7 @@ Plugin API
 ##### Filter `woocommerce_pay4pay_{$current_gateway_id}_amount`: #####
 Applied to the payment gateway fee before it is added to woocomerce' cart.
 
-Usage:
+** Usage: **
 
 	function my_pay4pay_amount( $amount , $cart_subtotal , $current_payment_gateway ) {
 		if ( my_customer_complained_too_much() )
@@ -33,7 +33,7 @@ Usage:
 ##### Filter `woocommerce_pay4pay_applyfor_{$current_gateway_id}`: #####
 Handle if a payment fee should be applied.
 
-Usage:
+** Usage: **
 
 	function my_pay4pay_apply( $do_apply , $amount , $cart_subtotal , $current_payment_gateway ) {
 		if ( my_customer_is_a_nice_guy() )
