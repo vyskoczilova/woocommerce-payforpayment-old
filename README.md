@@ -15,7 +15,7 @@ Features
 
 Plugin API
 ----------
-### Filter `woocommerce_pay4pay_{$current_gateway_id}_amount`: ###
+##### Filter `woocommerce_pay4pay_{$current_gateway_id}_amount`: #####
 Applied to the payment gateway fee before it is added to woocomerce' cart.
 
 Usage:
@@ -30,7 +30,7 @@ Usage:
 	add_filter( "woocommerce_pay4pay_{$current_gateway_id}_amount", 'my_pay4pay_amount' , 10 , 3 );
 
 
-### Filter `woocommerce_pay4pay_applyfor_{$current_gateway_id}`: ###
+##### Filter `woocommerce_pay4pay_applyfor_{$current_gateway_id}`: #####
 Handle if a payment fee should be applied.
 
 Usage:
