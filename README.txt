@@ -42,11 +42,16 @@ No. PayPal does not permit charging your customer for using PayPal. This is a le
 See [PayPal User Agreement](https://www.paypal.com/webapps/mpp/ua/useragreement-full?country.x=US&locale.x=en_US#4), > "4.6 No Surcharges" for details. 
 You have been warned.
 
-= Can't to setup my payment requirements in the user interface. The option I need is mising. =
+= Can't to setup my payment requirements in the user interface. The option I need is missing. =
 
 The plugin user interface only offers either a fixed amout or a percentage of the carts subtotal. 
-If you need to implement more complex calcuations like 'no charges for ordersa above 100 Bucks' or '2% of cart subtotal but at least 2 Bucks', 
+If you need to implement more complex calcuations like 'no charges for orders above 100 Bucks' or '2% of cart subtotal but at least 2 Bucks', 
 you'll have to use one of the filters. See [Plugin API](https://github.com/mcguffin/woocommerce-payforpayment#plugin-api) for details.
+
+<code>woocommerce_pay4pay_applyfor_{$payment_gateway_id}</code> specifies if a charge will be applied.
+
+<code>woocommerce_pay4pay_{$payment_gateway_id}_amount</code> allows you to alter the amount of the charge being added.
+
 
 = I want to use the latest files. How can I do this? =
 
