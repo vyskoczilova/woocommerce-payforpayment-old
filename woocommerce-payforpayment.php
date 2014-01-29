@@ -1,13 +1,13 @@
 <?php
 /*
 Plugin Name: WooCommerce Pay for Payment
-Plugin URI: https://github.com/mcguffin/woocommerce-payforpayment
+Plugin URI: http://wordpress.org/plugins/woocommerce-payforpayment
 Description: Setup individual charges for each payment method in woocommerce.
 Version: 1.0.0
 Author: Jörn Lund
 Author URI: https://github.com/mcguffin
 
-Text Domain: chargepayment
+Text Domain: pay4pay
 Domain Path: /lang/
 */
 
@@ -119,6 +119,7 @@ jQuery(document).ready(function($){
 
 	function add_payment_options( ) {
 		global $woocommerce;
+		
 		foreach ( $woocommerce->payment_gateways()->payment_gateways() as $gateway_id => $gateway ) {
 			$gateway->form_fields += array(
 				'pay4pay_title' => array(
@@ -170,7 +171,6 @@ jQuery(document).ready(function($){
 			);
 			add_action( 'woocommerce_update_options_payment_gateways_'.$gateway->id , array($this,'update_payment_options') , 20 );
 		}
-		return;
 	}
 	
 	function update_payment_options(  ) {

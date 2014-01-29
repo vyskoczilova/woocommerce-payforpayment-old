@@ -1,7 +1,7 @@
 === WooCommerce Pay for Payment ===
 Contributors: podpirate
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QFR9BVRT6SEP6
-Tags: ecommerce, woocommerce, payment, fee
+Tags: ecommerce, woocommerce, payment gateway, fee
 Requires at least: 3.5
 Tested up to: 3.8.1
 Stable tag: trunk
@@ -80,4 +80,10 @@ Either post it on [GitHub](https://github.com/mcguffin/wp-access-areas) or—if 
 1. User interface
 
 
-== 
+== Changelog ==
+
+= 1.0.0 =
+Initial release
+
+
+== Upgrade notice ==
