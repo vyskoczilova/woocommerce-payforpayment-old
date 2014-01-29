@@ -14,10 +14,17 @@ Domain Path: /lang/
 
 class Pay4Pay {
 
-	function __construct() {
-		global $woocommerce;
+	private static $_instance = null;
+
+	public static function instance(){
+		if ( is_null(self::$_instance) )
+			self::$_instance = new Pay4Pay();
+		return self::$_instance;
+	}
+
+	private function __construct() {
 		load_plugin_textdomain( 'pay4pay' , false, dirname( plugin_basename( __FILE__ )) . '/lang' );
-		add_filter( 'before_woocommerce_init' , array($this, 'add_payment_options') );
+		add_filter( 'woocommerce_init' , array($this, 'add_payment_options') );
 		add_action( 'woocommerce_before_calculate_totals' , array($this,'add_pay4payment' ) );
 		add_action( 'woocommerce_review_order_after_submit' , array($this,'print_autoload_js') );
 	}
@@ -35,20 +42,8 @@ jQuery(document).ready(function($){
 	
 	function add_pay4payment( ) {
 		global $woocommerce;
-		
-		$available_gateways = $woocommerce->payment_gateways->get_available_payment_gateways();
-		$current_gateway = '';
-		$default_gateway = get_option( 'woocommerce_default_gateway' );
-		if ( ! empty( $available_gateways ) ) {
-			
-		   // Chosen Method
-			if ( isset( $woocommerce->session->chosen_payment_method ) && isset( $available_gateways[ $woocommerce->session->chosen_payment_method ] ) ) {
-				$current_gateway = $available_gateways[ $woocommerce->session->chosen_payment_method ];
-			} elseif ( isset( $available_gateways[ $default_gateway ] ) ) {
-				$current_gateway = $available_gateways[ $default_gateway ];
-			} else {
-				$current_gateway =	current( $available_gateways );
-			}
+
+		if ( $current_gateway = $this->get_current_gateway() ) {
 			
 			if ( isset( $current_gateway->settings['pay4pay_charges_fixed']) ) {
 				$cost = $current_gateway->settings['pay4pay_charges_fixed'];
@@ -87,7 +82,30 @@ jQuery(document).ready(function($){
 			}
 		}
 	}
-
+	
+	function get_current_gateway(){
+		global $woocommerce;
+		
+		$available_gateways = $woocommerce->payment_gateways->get_available_payment_gateways();
+		$current_gateway = null;
+		$default_gateway = get_option( 'woocommerce_default_gateway' );
+		if ( ! empty( $available_gateways ) ) {
+			
+		   // Chosen Method
+			if ( isset( $woocommerce->session->chosen_payment_method ) && isset( $available_gateways[ $woocommerce->session->chosen_payment_method ] ) ) {
+				$current_gateway = $available_gateways[ $woocommerce->session->chosen_payment_method ];
+			} elseif ( isset( $available_gateways[ $default_gateway ] ) ) {
+				$current_gateway = $available_gateways[ $default_gateway ];
+			} else {
+				$current_gateway = current( $available_gateways );
+			}
+		}
+		if ( ! is_null( $current_gateway ) )
+			return $current_gateway;
+		else 
+			return false;
+	}
+	
 	function cart_has_fee( &$cart , $item_title , $amount ) {
 		$fees = $cart->get_fees();
 		$item_id = sanitize_title($item_title);
@@ -99,7 +117,7 @@ jQuery(document).ready(function($){
 	}
 	
 
-	function add_payment_options( $some ) {
+	function add_payment_options( ) {
 		global $woocommerce;
 		foreach ( $woocommerce->payment_gateways()->payment_gateways() as $gateway_id => $gateway ) {
 			$gateway->form_fields += array(
@@ -152,7 +170,7 @@ jQuery(document).ready(function($){
 			);
 			add_action( 'woocommerce_update_options_payment_gateways_'.$gateway->id , array($this,'update_payment_options') , 20 );
 		}
-		return $some;
+		return;
 	}
 	
 	function update_payment_options(  ) {
@@ -175,9 +193,4 @@ jQuery(document).ready(function($){
 	
 }
 
-new Pay4Pay();
-
-
-
-
-?>
+$woocommerce_pay4pay = Pay4Pay::instance();
