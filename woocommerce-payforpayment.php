@@ -2,8 +2,8 @@
 /*
 Plugin Name: WooCommerce Pay for Payment
 Plugin URI: https://github.com/mcguffin/woocommerce-payforpayment
-Description: Add extra fees depending on your payment methods.
-Version: 0.1.0
+Description: Setup individual charges for each payment method in woocommerce.
+Version: 1.0.0
 Author: Jörn Lund
 Author URI: https://github.com/mcguffin
 
