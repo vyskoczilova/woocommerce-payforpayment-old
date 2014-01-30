@@ -85,5 +85,7 @@ Either post it on [GitHub](https://github.com/mcguffin/wp-access-areas) or—if 
 = 1.0.0 =
 Initial release
 
+= 1.0.1 =
+Fix plugin URL
 
 == Upgrade notice ==
