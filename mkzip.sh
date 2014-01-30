@@ -1,3 +1,4 @@
+#!/bin/bash
 CWDNAME=${PWD##*/}
 
 if [ "$CWDNAME" == "trunk" ]; then
