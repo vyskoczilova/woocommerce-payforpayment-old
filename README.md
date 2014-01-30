@@ -7,6 +7,8 @@ Add individual charges for each payment method as a flat rate and/or as a percen
 The plugin first calculates the percentage rate and then adds the fixed rate on top.
 Coupons are not supported. (Sorry guys. I tried, but no way.)
 
+You will find a stable version in [WordPress plugin directory](http://wordpress.org/plugins/woocommerce-pay-for-payment/).
+
 Features
 --------
 - Fixed charge and/or a percentage of cart total
