@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce Pay for Payment v1.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2014-02-12 16:07+0200\n"
+"PO-Revision-Date: 2014-02-13 17:56:46+0000\n"
 "Last-Translator: Vapors Bazar <vaporsbazar@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -11,108 +11,108 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 1.5.7\n"
+"X-Poedit-Language: \n"
+"X-Poedit-Country: \n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
-"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
 "X-Poedit-Basepath: ../\n"
-"X-Textdomain-Support: yes\n"
+"X-Poedit-Bookmarks: \n"
 "X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
 
-# @ pay4pay
 #. translators: plugin header field 'Name'
 #: woocommerce-payforpayment.php:0
+#@ pay4pay
 msgid "WooCommerce Pay for Payment"
 msgstr "WooCommerce Pay for Payment"
 
-# @ pay4pay
 #. translators: plugin header field 'Author'
 #: woocommerce-payforpayment.php:0
+#@ pay4pay
 msgid "Jörn Lund"
 msgstr "Jörn Lund"
 
-# @ pay4pay
 #. translators: plugin header field 'AuthorURI'
 #: woocommerce-payforpayment.php:0
+#@ pay4pay
 msgid "https://github.com/mcguffin"
 msgstr "https://github.com/mcguffin"
 
-# @ pay4pay
 #: woocommerce-payforpayment.php:140
+#@ pay4pay
 msgid "Fixed charge"
 msgstr "Sabit Ücret"
 
-# @ pay4pay
 #: woocommerce-payforpayment.php:142
+#@ pay4pay
 msgid "Extra charge to be added to cart when this payment method is selected."
 msgstr "Bu ödeme yöntemi seçildiğinde ekstra ücret sepete eklenecek."
 
-# @ pay4pay
 #: woocommerce-payforpayment.php:150
+#@ pay4pay
 msgid "Percent charge"
 msgstr "Yüzde Ücreti"
 
-# @ pay4pay
 #: woocommerce-payforpayment.php:152
+#@ pay4pay
 msgid "Percentage of cart total to be added to payment."
 msgstr "Sepet toplamının yüzdesi sipariş tutarına eklenecek."
 
-# @ pay4pay
 #: woocommerce-payforpayment.php:162
+#@ pay4pay
 msgid "Select an option to handle taxes for the extra charges specified above."
-msgstr ""
-"Yukarıda belirtilen ekstra ücrete vergilerin dahil olup olmadığını "
-"belirlemek bir seçenek seçin."
+msgstr "Yukarıda belirtilen ekstra ücrete vergilerin dahil olup olmadığını belirlemek bir seçenek seçin."
 
-# @ pay4pay
 #: woocommerce-payforpayment.php:164
+#@ pay4pay
 msgid "No taxes"
 msgstr "Vergi yok"
 
-# @ woocommerce
 #: woocommerce-payforpayment.php:165
+#@ woocommerce
 msgid "Including tax"
 msgstr "Vergi dahil"
 
-# @ woocommerce
 #: woocommerce-payforpayment.php:166
+#@ woocommerce
 msgid "Excluding tax"
 msgstr "Vergi hariç"
 
-# @ pay4pay
 #: woocommerce-payforpayment.php:160
+#@ pay4pay
 msgid "Includes Taxes"
 msgstr "Vergi Kapsamı"
 
-# @ pay4pay
 #: woocommerce-payforpayment.php:126
+#@ pay4pay
 msgid "Extra Charge"
 msgstr "Ekstra Ücret"
 
-# @ pay4pay
 #: woocommerce-payforpayment.php:131
+#@ pay4pay
 msgid "Item Title"
 msgstr "Öğe Başlığı"
 
-# @ pay4pay
 #: woocommerce-payforpayment.php:133
+#@ pay4pay
 msgid "This will show up in the shopping basket."
 msgstr "Bu, alışveriş sepetinde gösterilecektir."
 
-# @ pay4pay
 #. translators: plugin header field 'PluginURI'
 #: woocommerce-payforpayment.php:0
+#@ pay4pay
 msgid "http://wordpress.org/plugins/woocommerce-pay-for-payment"
 msgstr "http://wordpress.org/plugins/woocommerce-pay-for-payment"
 
-# @ pay4pay
 #. translators: plugin header field 'Description'
 #: woocommerce-payforpayment.php:0
+#@ pay4pay
 msgid "Setup individual charges for each payment method in woocommerce."
-msgstr ""
-"WooCommerce içinde her bir ödeme yöntemi için farklı ücretler ayarlayın."
+msgstr "WooCommerce içinde her bir ödeme yöntemi için farklı ücretler ayarlayın."
 
-# @ pay4pay
 #. translators: plugin header field 'Version'
 #: woocommerce-payforpayment.php:0
+#@ pay4pay
 msgid "1.0.1"
 msgstr "1.0.1"
+
