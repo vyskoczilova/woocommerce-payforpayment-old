@@ -16,11 +16,11 @@ Setup individual charges for each payment method in woocommerce.
 Add individual charges for each payment method as a flat rate and/or as a percentage of the cart total.
 The plugin first calculates the percentage rate and then adds the fixed rate on top.
 
-Tested with woocommerce 2.0.14 up to 2.0.20.
+Tested with woocommerce 2.0.14 up to 2.1.1.
 
 = Features =
 - Fixed charge and/or a percentage of cart total
-- Translations in German, Spanish ([muchas graçias!](https://github.com/GosserBox)) and Turkish localization ([çok teşekkürler!](https://github.com/TRRF))
+- Translations in German, Spanish ([muchas graçias!](https://github.com/GosserBox)) and Turkish localization ([çok](https://www.transifex.com/accounts/profile/TRFlavourart/) [teşekkürler!](https://github.com/TRRF))
 
 = Restrictions =
 - Coupons are not supported.
@@ -82,10 +82,15 @@ Either post it on [GitHub](https://github.com/mcguffin/wp-access-areas) or—if 
 
 == Changelog ==
 
-= 1.0.0 =
-Initial release
+= 1.0.2 =
+- Fixed an issue where Pay4Pay options did not show up after saving checkout settings in WC 2.1.0
+- Updated turkish translation ([Thanks a lot!](https://www.transifex.com/accounts/profile/TRFlavourart/))
 
 = 1.0.1 =
 Fix plugin URL
 
+= 1.0.0 =
+Initial release
+
 == Upgrade notice ==
+Users who upgraded to woocommerce 2.1 should update to 1.0.2 as well.
