@@ -24,7 +24,8 @@ class Pay4Pay {
 
 	private function __construct() {
 		load_plugin_textdomain( 'pay4pay' , false, dirname( plugin_basename( __FILE__ )) . '/lang' );
-		add_filter( 'woocommerce_init' , array($this, 'add_payment_options') );
+		add_action( 'woocommerce_init' , array($this, 'add_payment_options') );
+		add_action( 'woocommerce_update_options_checkout' , array($this, 'add_payment_options') );
 		add_action( 'woocommerce_before_calculate_totals' , array($this,'add_pay4payment' ) );
 		add_action( 'woocommerce_review_order_after_submit' , array($this,'print_autoload_js') );
 	}
