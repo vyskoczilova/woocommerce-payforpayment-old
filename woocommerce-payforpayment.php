@@ -74,8 +74,8 @@ jQuery(document).ready(function($){
 				
 				$item_title = isset($current_gateway->settings['pay4pay_item_title']) ? $current_gateway->settings['pay4pay_item_title'] : $current_gateway->title;
 				
-				$cost = apply_filters( "woocommerce_pay4pay_{$current_gateway->id}_amount" , $cost , $subtotal , $current_gateway );
-				$do_apply = apply_filters( "woocommerce_pay4pay_applyfor_{$current_gateway->id}" , $cost != 0 , $cost , $subtotal , $current_gateway );
+				$cost = apply_filters( "woocommerce_pay4pay_{$current_gateway->id}_amount" , number_format($cost, 2) , $subtotal , $current_gateway );
+				$do_apply = apply_filters( "woocommerce_pay4pay_applyfor_{$current_gateway->id}" , $cost != 0 , number_format($cost, 2) , $subtotal , $current_gateway );
 
 				if ( $do_apply && ! $this->cart_has_fee( $woocommerce->cart , $item_title , $cost ) ) {
 					$woocommerce->cart->add_fee( $item_title , $cost, $taxable );
