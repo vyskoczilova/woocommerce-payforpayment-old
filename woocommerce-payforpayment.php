@@ -29,7 +29,7 @@ class Pay4Pay {
 		add_action( 'woocommerce_before_calculate_totals' , array($this,'add_pay4payment' ) );
 		add_action( 'woocommerce_review_order_after_submit' , array($this,'print_autoload_js') );
 	}
-	
+
 	function print_autoload_js(){
 		?><script type="text/javascript">
 jQuery(document).ready(function($){
@@ -48,11 +48,15 @@ jQuery(document).ready(function($){
 			
 			if ( isset( $current_gateway->settings['pay4pay_charges_fixed']) ) {
 				$cost = $current_gateway->settings['pay4pay_charges_fixed'];
-
+				
+				/*
 				$subtotal = 0;
 				foreach ( $woocommerce->cart->cart_contents as $key => $value ) {
 					$subtotal += $value['data']->price * $value['quantity'];
 				}
+				/*/
+				$subtotal = $woocommerce->cart->cart_contents_total;
+				//*/
 				if ( $percent = $current_gateway->settings['pay4pay_charges_percentage'] ) {
 					$cost += $subtotal * ($percent / 100 );
 				}
@@ -62,7 +66,8 @@ jQuery(document).ready(function($){
 				} else {
 					$taxable = true;
 					$tax = new WC_Tax();
-					$taxrates = array_shift($tax->get_shop_base_rate());
+					$base_rate = $tax->get_shop_base_rate();
+					$taxrates = array_shift( $base_rate );
 					$taxrate = floatval( $taxrates['rate']) / 100;
 					if ( $current_gateway->settings['pay4pay_taxes'] == 'incl' ) {
 						$taxes = $cost - ($cost / (1+$taxrate));
@@ -76,8 +81,9 @@ jQuery(document).ready(function($){
 				
 				$cost = apply_filters( "woocommerce_pay4pay_{$current_gateway->id}_amount" , $cost , $subtotal , $current_gateway );
 				$do_apply = apply_filters( "woocommerce_pay4pay_applyfor_{$current_gateway->id}" , $cost != 0 , $cost , $subtotal , $current_gateway );
-
+	
 				if ( $do_apply && ! $this->cart_has_fee( $woocommerce->cart , $item_title , $cost ) ) {
+					$cost = number_format($cost,2,'.','');
 					$woocommerce->cart->add_fee( $item_title , $cost, $taxable );
 				}
 			}
