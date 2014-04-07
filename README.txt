@@ -82,6 +82,10 @@ Either post it on [GitHub](https://github.com/mcguffin/wp-access-areas) or—if 
 
 == Changelog ==
 
+= 1.1.0 =
+- Added option to include shipping cost in fee calculation
+- Fixed issue where malformed amounts where sent to external payment services in WC 2.1.6
+
 = 1.0.2 =
 - Fixed an issue where Pay4Pay options did not show up after saving checkout settings in WC 2.1.0
 - Updated turkish translation ([Thanks a lot!](https://www.transifex.com/accounts/profile/TRFlavourart/))
