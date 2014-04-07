@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce Pay for Payment v1.0.2\n"
+"Project-Id-Version: WooCommerce Pay for Payment v1.1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2014-04-07 13:53:47+0000\n"
+"PO-Revision-Date: 2014-04-07 14:29:41+0000\n"
 "Last-Translator: WordCommerce <bilgi@wordcommerce.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -110,12 +110,6 @@ msgstr "http://wordpress.org/plugins/woocommerce-pay-for-payment"
 msgid "Setup individual charges for each payment method in woocommerce."
 msgstr "WooCommerce içinde her bir ödeme yöntemi için farklı ücretler ayarlayın."
 
-#. translators: plugin header field 'Version'
-#: woocommerce-payforpayment.php:0
-#@ pay4pay
-msgid "1.0.2"
-msgstr ""
-
 #: woocommerce-payforpayment.php:174
 #@ pay4pay
 msgid "Include Shipping"
@@ -125,4 +119,10 @@ msgstr "Kargo Ücretini Hesaplamaya Dahil Et"
 #@ pay4pay
 msgid "Check this if shipping cost should be included in the calculation of the payment fee."
 msgstr "Kargo ücretinin hesaplamaya dahil edilmesi gerekiyorsa işaretleyin."
+
+#. translators: plugin header field 'Version'
+#: woocommerce-payforpayment.php:0
+#@ pay4pay
+msgid "1.1.0"
+msgstr ""
 
