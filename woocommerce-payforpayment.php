@@ -48,15 +48,10 @@ jQuery(document).ready(function($){
 			
 			if ( isset( $current_gateway->settings['pay4pay_charges_fixed']) ) {
 				$cost = $current_gateway->settings['pay4pay_charges_fixed'];
-				
-				/*
-				$subtotal = 0;
-				foreach ( $woocommerce->cart->cart_contents as $key => $value ) {
-					$subtotal += $value['data']->price * $value['quantity'];
-				}
-				/*/
 				$subtotal = $woocommerce->cart->cart_contents_total;
-				//*/
+				if ( $current_gateway->settings['pay4pay_include_shipping'] == 'yes' )
+					$subtotal += $woocommerce->cart->shipping_total;
+
 				if ( $percent = $current_gateway->settings['pay4pay_charges_percentage'] ) {
 					$cost += $subtotal * ($percent / 100 );
 				}
@@ -175,6 +170,13 @@ jQuery(document).ready(function($){
 					'default' => 'incl',
 					'desc_tip' => true,
 				),
+				'pay4pay_include_shipping' => array(
+					'title' => __('Include Shipping','pay4pay'),
+					'type' => 'checkbox',
+					'description' => __( 'Check this if shipping cost should be included in the calculation of the payment fee.', 'pay4pay' ),
+					'default' => 'no',
+					'desc_tip' => true,
+				),
 			);
 			add_action( 'woocommerce_update_options_payment_gateways_'.$gateway->id , array($this,'update_payment_options') , 20 );
 		}
@@ -186,18 +188,22 @@ jQuery(document).ready(function($){
 		$prefix = 'woocommerce_'.$class->id;
 		$opt_name = $prefix.'_settings';
 		$options = get_option( $opt_name );
-		
 		// validate!
 		$extra = array(
 			'pay4pay_item_title' => sanitize_text_field( $_POST[$prefix.'_pay4pay_item_title'] ),
 			'pay4pay_charges_fixed' => floatval( $_POST[$prefix.'_pay4pay_charges_fixed'] ),
 			'pay4pay_charges_percentage' => floatval( $_POST[$prefix.'_pay4pay_charges_percentage'] ),
-			'pay4pay_taxes' => $_POST[$prefix.'_pay4pay_taxes'], // 0, incl, excl
+			'pay4pay_taxes' => $this->_sanitize_tax_option($_POST[$prefix.'_pay4pay_taxes']), // 0, incl, excl
+			'pay4pay_include_shipping' => isset($_POST[$prefix.'_pay4pay_include_shipping']) && $_POST[$prefix.'_pay4pay_include_shipping'] === '1' ? 'yes' : 'no' ,
 		);
 		$options += $extra;
 		update_option( $opt_name , $options );
 	}
-	
+	private function _sanitize_tax_option( $tax_option , $default = 'incl' ) {
+		if ( in_array( $tax_option , array(0,'incl','excl') ) )
+			return $tax_option;
+		return $default;
+	}
 }
 
 $woocommerce_pay4pay = Pay4Pay::instance();
