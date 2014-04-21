@@ -3,7 +3,7 @@ Contributors: podpirate
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QFR9BVRT6SEP6
 Tags: ecommerce, woocommerce, payment gateway, fee
 Requires at least: 3.5
-Tested up to: 3.8.1
+Tested up to: 3.9
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -16,7 +16,7 @@ Setup individual charges for each payment method in woocommerce.
 Add individual charges for each payment method as a flat rate and/or as a percentage of the cart total.
 The plugin first calculates the percentage rate and then adds the fixed rate on top.
 
-Tested with woocommerce 2.0.14 up to 2.1.1.
+Tested with woocommerce 2.0.14 up to 2.1.7.
 
 = Features =
 - Fixed charge and/or a percentage of cart total
