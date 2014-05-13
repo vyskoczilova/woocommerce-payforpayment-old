@@ -8,7 +8,7 @@ Author: Jörn Lund
 Author URI: https://github.com/mcguffin
 License: GPL
 Text Domain: pay4pay
-Domain Path: /lang/
+Domain Path: /languages/
 */
 
 /**
