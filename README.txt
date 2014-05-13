@@ -82,6 +82,9 @@ Either post it on [GitHub](https://github.com/mcguffin/wp-access-areas) or—if 
 
 == Changelog ==
 
+= 1.1.1 =
+- Added wpml configuration file to keep compatibility with http://wordpress.org/plugins/woocommerce-multilingual/
+
 = 1.1.0 =
 - Added option to include shipping cost in fee calculation
 - Fixed issue where malformed amounts where sent to external payment services in WC 2.1.6
@@ -95,6 +98,3 @@ Fix plugin URL
 
 = 1.0.0 =
 Initial release
-
-== Upgrade notice ==
-Users who upgraded to woocommerce 2.1 should update to 1.0.2 as well.
