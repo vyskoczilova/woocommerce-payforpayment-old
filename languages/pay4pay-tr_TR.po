@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce Pay for Payment v1.1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: Tue May 13 2014 15:48:43 GMT+0200 (CEST)\n"
+"PO-Revision-Date: Tue May 13 2014 16:11:49 GMT+0200 (CEST)\n"
 "Last-Translator: admin <joern@podpirate.org>\n"
 "Language-Team: \n"
 "Language: Turkish\n"
@@ -22,6 +22,11 @@ msgstr ""
 "X-Textdomain-Support: yes\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Loco-Target-Locale: tr_TR"
+
+#: ../admin/class-pay4pay-admin.php:141
+msgctxt "Gateway list column"
+msgid "%s %% of cart totals"
+msgstr "Sepet toplamına oranı: %s %%"
 
 #: ../woocommerce-payforpayment.php:32 ../admin/class-pay4pay-admin.php:35 ../admin/class-pay4pay-admin.php:129
 msgid "Extra Charge"
@@ -90,8 +95,3 @@ msgstr "Ücretsiz Kargo"
 #: ../admin/class-pay4pay-admin.php:84
 msgid "Don’t charge this fee when free shipping is available."
 msgstr "Ücretsiz kargo etkinleştirildiği zaman bu ücreti yükleme."
-
-#: ../admin/class-pay4pay-admin.php:141
-msgctxt "Gateway list column"
-msgid "%s %% of cart totals"
-msgstr ""

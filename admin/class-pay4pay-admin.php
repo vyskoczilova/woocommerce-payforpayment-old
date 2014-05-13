@@ -80,7 +80,7 @@ class Pay4Pay_Admin {
 				'desc_tip' => true,
 			),
 			'pay4pay_disable_on_free_shipping' => array(
-				'title' => __('Free Shipping','pay4pay'),
+				'title' => __( 'Free Shipping' , 'pay4pay' ),
 				'label' => __( 'Don’t charge this fee when free shipping is available.' , 'pay4pay' ),
 				'type' => 'checkbox',
 				'desc_tip' => true,
