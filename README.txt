@@ -21,6 +21,7 @@ Tested with woocommerce 2.0.14 up to 2.1.7.
 = Features =
 - Fixed charge and/or a percentage of cart total
 - Translations in German, Spanish ([muchas graçias!](https://github.com/GosserBox)) and Turkish localization ([çok](https://www.transifex.com/accounts/profile/TRFlavourart/) [teşekkürler!](https://github.com/TRRF))
+- Plugin API. See [GitHub](https://github.com/mcguffin/woocommerce-payforpayment) for details.
 
 = Restrictions =
 - Coupons are not supported.
@@ -81,6 +82,12 @@ Either post it on [GitHub](https://github.com/mcguffin/wp-access-areas) or—if 
 
 
 == Changelog ==
+
+= 1.2.0 =
+- Feature: add option to disable payment fee when free shipping is selected
+- Feature: add pay4pay column in woocommerce checkout settings
+- Plugin-API: add filter `woocommerce_pay4pay_apply`
+- Code Refactoring: separated admin UI from frontend to keep things lean
 
 = 1.1.1 =
 - Added wpml configuration file to keep compatibility with http://wordpress.org/plugins/woocommerce-multilingual/

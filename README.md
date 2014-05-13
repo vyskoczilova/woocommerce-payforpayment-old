@@ -32,8 +32,23 @@ Applied to the payment gateway fee before it is added to woocomerce' cart.
 	add_filter( "woocommerce_pay4pay_{$current_gateway_id}_amount", 'my_pay4pay_amount' , 10 , 3 );
 
 
+##### Filter `woocommerce_pay4pay_apply`: #####
+Handle if a payment fee is applied.
+
+*Usage:*
+
+	function my_pay4pay_handle_christmas( $do_apply , $amount , $cart_subtotal , $current_payment_gateway ) {
+		if ( today_is_christmas() || rand() > 0.5 )
+			return false;
+		else
+			return $do_apply;
+	}
+	add_filter( "woocommerce_pay4pay_apply", 'my_pay4pay_handle_christmas' , 10 , 4 );
+
+
+
 ##### Filter `woocommerce_pay4pay_applyfor_{$current_gateway_id}`: #####
-Handle if a payment fee should be applied.
+Handle if a payment fee on a specific payment method should be applied.
 
 *Usage:*
 
@@ -51,6 +66,6 @@ Handle if a payment fee should be applied.
 Compatibility
 -------------
 - Developed with WP 3.6 and woocommerce 2.0.14
-- Tested up to WP 3.7.1 / WC 2.0.19
+- Tested up to WP 3.9.1 / WC 2.1.8
 - Not compatible with PayPal policy. Details: [PayPal User Agreement](https://www.paypal.com/webapps/mpp/ua/useragreement-full?country.x=US&locale.x=en_US#4), > "4.6 No Surcharges". You have been warned.
 
