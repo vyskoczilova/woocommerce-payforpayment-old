@@ -1,0 +1,19 @@
+<wpml-config>
+	<admin-texts>
+		<key name="woocommerce_bacs_settings">
+			<key name="pay4pay_item_title" />
+		</key>
+		<key name="woocommerce_cheque_settings">
+			<key name="pay4pay_item_title" />
+		</key>
+		<key name="woocommerce_cod_settings">
+			<key name="pay4pay_item_title" />
+		</key>
+		<key name="woocommerce_mijireh_checkout_settings">
+			<key name="pay4pay_item_title" />
+		</key>
+		<key name="woocommerce_paypal_settings">
+			<key name="pay4pay_item_title" />
+			</key>
+	</admin-texts>
+</wpml-config>
