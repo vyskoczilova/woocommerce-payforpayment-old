@@ -27,7 +27,7 @@ Tested with woocommerce 2.0.14 up to 2.1.7.
 - Coupons are not supported.
 - Better not use it wih paypal. (Legal issue, see FAQ as well.)
 
-Latest files on [GitHub](https://github.com/mcguffin/woocommerce-payforpayment).
+Latest files on [GitHub](http://codex.wordpress.org/Managing_Plugins).
 
 
 == Installation ==
