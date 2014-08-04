@@ -89,7 +89,9 @@ Either post it on [GitHub](https://github.com/mcguffin/wp-access-areas) or—if 
 - Feature: add option to disable payment fee when free shipping is selected
 - Feature: add pay4pay column in woocommerce checkout settings
 - Plugin-API: add filter `woocommerce_pay4pay_apply`
-- Code Refactoring: separated admin UI from frontend to keep things lean
+- Code Refactoring: separated admin UI from frontend to keep things lean.
+- Code Refactoring: use function <code>WC()</code> (available since WC 2.1) in favour of <code>global $woocommerce</code>.
+- Compatibility: requires at least WC 2.1.x, 
 
 = 1.1.1 =
 - Added wpml configuration file to keep compatibility with http://wordpress.org/plugins/woocommerce-multilingual/
@@ -107,3 +109,8 @@ Fix plugin URL
 
 = 1.0.0 =
 Initial release
+
+
+== Upgrade notice ==
+
+This update requires at least WooCommerce 2.1. Please update WC first.
