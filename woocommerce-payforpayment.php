@@ -3,7 +3,7 @@
 Plugin Name: WooCommerce Pay for Payment
 Plugin URI: http://wordpress.org/plugins/woocommerce-pay-for-payment
 Description: Setup individual charges for each payment method in woocommerce.
-Version: 1.2.0
+Version: 1.2.1
 Author: Jörn Lund
 Author URI: https://github.com/mcguffin
 License: GPL
@@ -33,6 +33,7 @@ class Pay4Pay {
 			'pay4pay_charges_fixed' => 0,
 			'pay4pay_charges_percentage' => 0,
 			'pay4pay_taxes' => 'incl',
+			'pay4pay_enable_extra_fees' => 'no',
 			'pay4pay_include_shipping' => 'no',
 			'pay4pay_disable_on_free_shipping' => 'no',
 		);
@@ -42,7 +43,7 @@ class Pay4Pay {
 	private function __construct() {
 		load_plugin_textdomain( 'pay4pay' , false, dirname( plugin_basename( __FILE__ )) . '/lang' );
 
-		add_action( 'woocommerce_cart_calculate_fees' , array($this,'add_pay4payment' ) );
+		add_action( 'woocommerce_calculate_totals' , array($this,'add_pay4payment' ) , 99 );
 		add_action( 'woocommerce_review_order_after_submit' , array($this,'print_autoload_js') );
 	}
 
@@ -60,12 +61,16 @@ jQuery(document).ready(function($){
 	function add_pay4payment( ) {
 		if ( ( $current_gateway = $this->get_current_gateway() ) && ( $settings = $this->get_current_gateway_settings()) ) {
 			if ( $settings['pay4pay_charges_fixed'] || $settings['pay4pay_charges_percentage'] ) {
-				$cost = $settings['pay4pay_charges_fixed'];
-				$subtotal = WC()->cart->cart_contents_total;
+				$cart = WC()->cart;
+				$cost = floatval($settings['pay4pay_charges_fixed']);
+				$subtotal = $cart->cart_contents_total;
+				$cart->calculate_fees();
+				if ( 'yes' == $settings['pay4pay_enable_extra_fees'] )
+					$subtotal += $cart->fee_total - $cart->discount_total;
 				$disable_on_free_shipping = $settings['pay4pay_disable_on_free_shipping'] == 'yes';
 				if ( ! $disable_on_free_shipping || ! in_array( 'free_shipping' , WC()->session->get( 'chosen_shipping_methods' )) ) {
-					if ( $settings['pay4pay_include_shipping'] == 'yes' )
-						$subtotal += WC()->cart->shipping_total;
+					if ('yes' == $settings['pay4pay_include_shipping'] )
+						$subtotal += $cart->shipping_total;
 
 					if ( $percent  = $settings['pay4pay_charges_percentage'] ) {
 						$cost += $subtotal * ($percent / 100 );
@@ -94,9 +99,10 @@ jQuery(document).ready(function($){
 					$do_apply = apply_filters( "woocommerce_pay4pay_apply" , $do_apply , $cost , $subtotal , $current_gateway );
 					$do_apply = apply_filters( "woocommerce_pay4pay_applyfor_{$current_gateway->id}" , $do_apply , $cost , $subtotal , $current_gateway );
 	
-					if ( $do_apply && ! $this->cart_has_fee( WC()->cart , $item_title , $cost ) ) {
+					if ( $do_apply && ! $this->cart_has_fee( $cart , $item_title , $cost ) ) {
 						$cost = number_format($cost,2,'.','');
-						WC()->cart->add_fee( $item_title , $cost, $taxable );
+						$cart->add_fee( $item_title , $cost, $taxable );
+						$cart->calculate_fees();
 					}
 				}
 			}

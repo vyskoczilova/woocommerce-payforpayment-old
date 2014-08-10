@@ -73,6 +73,12 @@ class Pay4Pay_Admin {
 				),
 				'desc_tip' => true,
 			),
+			'pay4pay_enable_extra_fees' => array(
+				'title' => __('Enable Extra Fees','pay4pay'),
+				'type' => 'checkbox',
+				'label' => __( 'If checked all extra fees and coupons will be included in the calculation of the fee.', 'pay4pay' ),
+				'desc_tip' => true,
+			),
 			'pay4pay_include_shipping' => array(
 				'title' => __('Include Shipping','pay4pay'),
 				'type' => 'checkbox',
@@ -108,6 +114,7 @@ class Pay4Pay_Admin {
 			'pay4pay_charges_fixed' => floatval( $_POST[$prefix.'_pay4pay_charges_fixed'] ),
 			'pay4pay_charges_percentage' => floatval( $_POST[$prefix.'_pay4pay_charges_percentage'] ),
 			'pay4pay_taxes' => $this->_sanitize_tax_option($_POST[$prefix.'_pay4pay_taxes']), // 0, incl, excl
+			'pay4pay_enable_extra_fees' => isset($_POST[$prefix.'_pay4pay_enable_extra_fees']) && $_POST[$prefix.'_pay4pay_enable_extra_fees'] === '1' ? 'yes' : 'no' ,
 			'pay4pay_include_shipping' => isset($_POST[$prefix.'_pay4pay_include_shipping']) && $_POST[$prefix.'_pay4pay_include_shipping'] === '1' ? 'yes' : 'no' ,
 			'pay4pay_disable_on_free_shipping' => isset($_POST[$prefix.'_pay4pay_disable_on_free_shipping']) && $_POST[$prefix.'_pay4pay_disable_on_free_shipping'] === '1' ? 'yes' : 'no' ,
 		);

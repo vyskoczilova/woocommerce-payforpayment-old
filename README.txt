@@ -85,6 +85,9 @@ Either post it on [GitHub](https://github.com/mcguffin/wp-access-areas) or—if 
 
 == Changelog ==
 
+= 1.2.1 =
+Feature: [Calculate custom fee](http://wordpress.org/support/topic/not-calculating-custom-fees)
+
 = 1.2.0 =
 - Feature: add option to disable payment fee when free shipping is selected
 - Feature: add pay4pay column in woocommerce checkout settings
