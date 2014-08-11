@@ -16,7 +16,7 @@ Setup individual charges for each payment method in woocommerce.
 Add individual charges for each payment method as a flat rate and/or as a percentage of the cart total.
 The plugin first calculates the percentage rate and then adds the fixed rate on top.
 
-Tested with woocommerce 2.0.14 up to 2.1.7.
+Requires at least woocommerce 2.1.
 
 = Features =
 - Fixed charge and/or a percentage of cart total
