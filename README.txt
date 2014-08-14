@@ -120,4 +120,5 @@ Initial release
 
 == Upgrade notice ==
 
-This update requires at least WooCommerce 2.1. Please update WC first.
+v1.2.2 fixes a severe taxes issue ending up in cart totals not being calculted correctly when pay4pay method is taxable.
+This version requires at least WooCommerce 2.1. Please update WC first.
