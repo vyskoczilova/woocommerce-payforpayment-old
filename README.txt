@@ -32,8 +32,7 @@ Latest files on [GitHub](http://codex.wordpress.org/Managing_Plugins).
 
 == Installation ==
 
-Just follow the standard [WordPress plugin installation procedere](https://github.com/mcguffin/woocommerce-payforpayment).
-
+Just follow the standard [WordPress plugin installation procedere](http://codex.wordpress.org/Managing_Plugins).
 
 == Frequently asked questions ==
 
@@ -84,6 +83,11 @@ Either post it on [GitHub](https://github.com/mcguffin/wp-access-areas) or—if 
 
 
 == Changelog ==
+
+= 1.2.2 =
+Fix: [Calculate taxes](http://wordpress.org/support/topic/cant-use-the-plugin-generate-false-amount-in-adding)
+Fix: cart contents taxes and shipping taxes included into fee calculation
+Refactoring: Discard cart_has_fee() check, as it is already done by woocommerce
 
 = 1.2.1 =
 Feature: [Calculate custom fee](http://wordpress.org/support/topic/not-calculating-custom-fees)

@@ -63,14 +63,14 @@ jQuery(document).ready(function($){
 			if ( $settings['pay4pay_charges_fixed'] || $settings['pay4pay_charges_percentage'] ) {
 				$cart = WC()->cart;
 				$cost = floatval($settings['pay4pay_charges_fixed']);
-				$subtotal = $cart->cart_contents_total;
+				$subtotal = $cart->cart_contents_total + $cart->tax_total;
 				$cart->calculate_fees();
 				if ( 'yes' == $settings['pay4pay_enable_extra_fees'] )
 					$subtotal += $cart->fee_total - $cart->discount_total;
 				$disable_on_free_shipping = $settings['pay4pay_disable_on_free_shipping'] == 'yes';
 				if ( ! $disable_on_free_shipping || ! in_array( 'free_shipping' , WC()->session->get( 'chosen_shipping_methods' )) ) {
 					if ('yes' == $settings['pay4pay_include_shipping'] )
-						$subtotal += $cart->shipping_total;
+						$subtotal += $cart->shipping_total + $cart->shipping_tax_total;
 
 					if ( $percent  = $settings['pay4pay_charges_percentage'] ) {
 						$cost += $subtotal * ($percent / 100 );
@@ -80,29 +80,37 @@ jQuery(document).ready(function($){
 						$taxes = 0;
 					} else {
 						$taxable = true;
+
 						$tax = new WC_Tax();
 						$base_rate = $tax->get_shop_base_rate();
 						$taxrates = array_shift( $base_rate );
 						$taxrate = floatval( $taxrates['rate']) / 100;
+
 						if ( $settings['pay4pay_taxes'] == 'incl' ) {
-							$taxes = $cost - ($cost / (1+$taxrate));
+							$taxes = round($cost - ($cost / (1+$taxrate)),4);
 							$cost -= $taxes;
 						} else {
-							$taxes = $cost * $taxrate;
+							$taxes = round($cost * $taxrate,4);
 						}
 					}
 				
 					$item_title = $settings['pay4pay_item_title'] ? $settings['pay4pay_item_title'] : $current_gateway->title;
-				
+
 					$cost = apply_filters( "woocommerce_pay4pay_{$current_gateway->id}_amount" , $cost , $subtotal , $current_gateway );
 					$do_apply = $cost != 0;
 					$do_apply = apply_filters( "woocommerce_pay4pay_apply" , $do_apply , $cost , $subtotal , $current_gateway );
 					$do_apply = apply_filters( "woocommerce_pay4pay_applyfor_{$current_gateway->id}" , $do_apply , $cost , $subtotal , $current_gateway );
-	
-					if ( $do_apply && ! $this->cart_has_fee( $cart , $item_title , $cost ) ) {
-						$cost = number_format($cost,2,'.','');
+					if ( $do_apply ) {
 						$cart->add_fee( $item_title , $cost, $taxable );
 						$cart->calculate_fees();
+						// recalc woocommerce carts taxes
+						if ( $taxable ) {
+							if ( $cart->round_at_subtotal ) {
+								$cart->tax_total = $cart->tax->get_tax_total( $cart->taxes );
+							} else {
+								$cart->tax_total = array_sum( $cart->taxes );
+							}
+						}
 					}
 				}
 			}
@@ -138,17 +146,6 @@ jQuery(document).ready(function($){
 		}
 		return false;
 	}
-	
-	function cart_has_fee( &$cart , $item_title , $amount ) {
-		$fees = $cart->get_fees();
-		$item_id = sanitize_title($item_title);
-		$amount = (float) esc_attr( $amount );
-		foreach ( $fees as $fee )
-			if ( $fee->amount == $amount && $fee->id == $item_id )
-				return true;
-		return false;
-	}
-
 }
 
 Pay4Pay::instance();
