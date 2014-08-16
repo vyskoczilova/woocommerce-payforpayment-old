@@ -84,6 +84,9 @@ Either post it on [GitHub](https://github.com/mcguffin/wp-access-areas) or—if 
 
 == Changelog ==
 
+= 1.2.3 =
+Fix: Safely Restrict payment fee to 2 Decimals.
+
 = 1.2.2 =
 Fix: [Calculate taxes](http://wordpress.org/support/topic/cant-use-the-plugin-generate-false-amount-in-adding)
 Fix: cart contents taxes and shipping taxes included into fee calculation
@@ -120,5 +123,3 @@ Initial release
 
 == Upgrade notice ==
 
-v1.2.2 fixes a severe taxes issue ending up in cart totals not being calculted correctly when pay4pay method is taxable.
-This version requires at least WooCommerce 2.1. Please update WC first.

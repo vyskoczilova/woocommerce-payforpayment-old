@@ -3,7 +3,7 @@
 Plugin Name: WooCommerce Pay for Payment
 Plugin URI: http://wordpress.org/plugins/woocommerce-pay-for-payment
 Description: Setup individual charges for each payment method in woocommerce.
-Version: 1.2.2
+Version: 1.2.3
 Author: Jörn Lund
 Author URI: https://github.com/mcguffin
 License: GPL
@@ -101,6 +101,8 @@ jQuery(document).ready(function($){
 					$do_apply = apply_filters( "woocommerce_pay4pay_apply" , $do_apply , $cost , $subtotal , $current_gateway );
 					$do_apply = apply_filters( "woocommerce_pay4pay_applyfor_{$current_gateway->id}" , $do_apply , $cost , $subtotal , $current_gateway );
 					if ( $do_apply ) {
+						// some payment services fail when more than 2 decimals are passed.
+						$cost = number_format($cost,2,'.','');
 						$cart->add_fee( $item_title , $cost, $taxable );
 						$cart->calculate_fees();
 						// recalc woocommerce carts taxes
