@@ -3,7 +3,7 @@
 Plugin Name: WooCommerce Pay for Payment
 Plugin URI: http://wordpress.org/plugins/woocommerce-pay-for-payment
 Description: Setup individual charges for each payment method in woocommerce.
-Version: 1.2.3
+Version: 1.2.4
 Author: Jörn Lund
 Author URI: https://github.com/mcguffin
 License: GPL
@@ -64,9 +64,11 @@ jQuery(document).ready(function($){
 				$cart = WC()->cart;
 				$cost = floatval($settings['pay4pay_charges_fixed']);
 				$subtotal = $cart->cart_contents_total + $cart->tax_total;
+				$this->fee_total = 0;
 				$cart->calculate_fees();
-				if ( 'yes' == $settings['pay4pay_enable_extra_fees'] )
+				if ( 'yes' == $settings['pay4pay_enable_extra_fees'] ) {
 					$subtotal += $cart->fee_total - $cart->discount_total;
+				}
 				$disable_on_free_shipping = $settings['pay4pay_disable_on_free_shipping'] == 'yes';
 				if ( ! $disable_on_free_shipping || ! in_array( 'free_shipping' , WC()->session->get( 'chosen_shipping_methods' )) ) {
 					if ('yes' == $settings['pay4pay_include_shipping'] )
@@ -104,6 +106,8 @@ jQuery(document).ready(function($){
 						// some payment services fail when more than 2 decimals are passed.
 						$cost = number_format($cost,2,'.','');
 						$cart->add_fee( $item_title , $cost, $taxable );
+						// reset fees before calculating!
+						$cart->fee_total = 0;
 						$cart->calculate_fees();
 						// recalc woocommerce carts taxes
 						if ( $taxable ) {
