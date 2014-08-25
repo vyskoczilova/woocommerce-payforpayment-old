@@ -84,6 +84,9 @@ Either post it on [GitHub](https://github.com/mcguffin/wp-access-areas) or—if 
 
 == Changelog ==
 
+= 1.2.5 =
+Fix: incorrect fee calculation.
+
 = 1.2.3 =
 Fix: Safely Restrict payment fee to 2 Decimals.
 
