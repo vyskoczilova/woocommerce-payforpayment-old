@@ -64,7 +64,7 @@ jQuery(document).ready(function($){
 				$cart = WC()->cart;
 				$cost = floatval($settings['pay4pay_charges_fixed']);
 				$subtotal = $cart->cart_contents_total + $cart->tax_total;
-				$this->fee_total = 0;
+				$cart->fee_total = 0;
 				$cart->calculate_fees();
 				if ( 'yes' == $settings['pay4pay_enable_extra_fees'] ) {
 					$subtotal += $cart->fee_total - $cart->discount_total;
@@ -95,7 +95,7 @@ jQuery(document).ready(function($){
 							$taxes = round($cost * $taxrate,4);
 						}
 					}
-				
+
 					$item_title = $settings['pay4pay_item_title'] ? $settings['pay4pay_item_title'] : $current_gateway->title;
 
 					$cost = apply_filters( "woocommerce_pay4pay_{$current_gateway->id}_amount" , $cost , $subtotal , $current_gateway );
