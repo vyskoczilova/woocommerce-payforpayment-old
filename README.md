@@ -20,25 +20,25 @@ Plugin API
 ##### Filter `woocommerce_pay4pay_{$current_gateway_id}_amount`: #####
 Applied to the payment gateway fee before it is added to woocomerce' cart.
 
-*Usage:*
+*Example:*
 
-	function my_pay4pay_amount( $amount , $cart_subtotal , $current_payment_gateway ) {
+	function my_pay4pay_amount( $amount , $calculation_base , $current_payment_gateway , $taxable , $include_taxes , $tax_class ) {
 		if ( my_customer_complained_too_much() )
 			return $amount * 10;
 		else
 			return $amount;
 	}
 	$current_gateway_id = 'cod';
-	add_filter( "woocommerce_pay4pay_{$current_gateway_id}_amount", 'my_pay4pay_amount' , 10 , 3 );
+	add_filter( "woocommerce_pay4pay_{$current_gateway_id}_amount", 'my_pay4pay_amount' , 10 , 6 );
 
 
 ##### Filter `woocommerce_pay4pay_apply`: #####
 Handle if a payment fee is applied.
 
-*Usage:*
+*Example:*
 
 	function my_pay4pay_handle_christmas( $do_apply , $amount , $cart_subtotal , $current_payment_gateway ) {
-		if ( today_is_christmas() || rand() > 0.5 )
+		if ( today_is_christmas() )
 			return false;
 		else
 			return $do_apply;
@@ -50,7 +50,7 @@ Handle if a payment fee is applied.
 ##### Filter `woocommerce_pay4pay_applyfor_{$current_gateway_id}`: #####
 Handle if a payment fee on a specific payment method should be applied.
 
-*Usage:*
+*Example:*
 
 	function my_pay4pay_apply( $do_apply , $amount , $cart_subtotal , $current_payment_gateway ) {
 		if ( my_customer_is_a_nice_guy() )

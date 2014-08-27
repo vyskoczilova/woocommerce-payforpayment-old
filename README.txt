@@ -16,6 +16,13 @@ Setup individual charges for each payment method in woocommerce.
 Add individual charges for each payment method as a flat rate and/or as a percentage of the cart total.
 The plugin first calculates the percentage rate and then adds the fixed rate on top.
 
+You can use placeholders in the payment item title:
+- [FIXED_AMOUNT]: Will print money-formatted fixed amount you entered.
+- [PERCENT_AMOUNT]: will print out percental amount you entered
+- [CART_TOTAL]: will print out money-formatted cart totals. 
+- Example: `Payment Fee ([FIXED_AMOUNT] + [PERCENT_AMOUNT]% of [CART_TOTAL])`
+
+
 Requires at least woocommerce 2.1.
 
 = Features =
@@ -23,9 +30,8 @@ Requires at least woocommerce 2.1.
 - Translations in German, Spanish ([muchas graçias!](https://github.com/GosserBox)) and Turkish localization ([çok](https://www.transifex.com/accounts/profile/TRFlavourart/) [teşekkürler!](https://github.com/TRRF))
 - Plugin API. See [GitHub](https://github.com/mcguffin/woocommerce-payforpayment) for details.
 
-= Restrictions =
-- Coupons are not supported.
-- Better not use it wih paypal. (Legal issue, see FAQ as well.)
+= Limitations =
+- Better not use it with paypal. (Legal issue, see FAQ as well.)
 
 Latest files on [GitHub](http://codex.wordpress.org/Managing_Plugins).
 
@@ -79,10 +85,17 @@ Either post it on [GitHub](https://github.com/mcguffin/wp-access-areas) or—if 
 
 == Screenshots ==
 
-1. User interface
+1. User interface. You can find this in every payment gateway configuration.
 
 
 == Changelog ==
+
+= 1.3.0 =
+Feature: Enhanced UI
+Feature: Select tax class to be applied to payment fee
+Feature: Select if cart taxes will be included on payment fee calculation
+Feature: Placeholders in fee title.
+Fixes: completely repeat all woocommerce tax and fee calculation steps after payment fee has been added. (Gosh, this is unesthecially, but there is no other way!)
 
 = 1.2.5 =
 Fix: incorrect fee calculation.
@@ -125,4 +138,5 @@ Initial release
 
 
 == Upgrade notice ==
-
+Version 1.3.0 is a rework of the plugin. Some of the settings have changed substantially, 
+so you better check your payment gateway settings.
