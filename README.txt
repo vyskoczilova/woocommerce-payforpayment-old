@@ -17,6 +17,7 @@ Add individual charges for each payment method as a flat rate and/or as a percen
 The plugin first calculates the percentage rate and then adds the fixed rate on top.
 
 You can use placeholders in the payment item title:
+
 - [FIXED_AMOUNT]: Will print money-formatted fixed amount you entered.
 - [PERCENT_AMOUNT]: will print out percental amount you entered
 - [CART_TOTAL]: will print out money-formatted cart totals. 
@@ -95,7 +96,7 @@ Feature: Enhanced UI
 Feature: Select tax class to be applied to payment fee
 Feature: Select if cart taxes will be included on payment fee calculation
 Feature: Placeholders in fee title.
-Fixes: completely repeat all woocommerce tax and fee calculation steps after payment fee has been added. (Gosh, this is unesthecially, but there is no other way!)
+Fixes: completely repeat all woocommerce tax and fee calculation steps after payment fee has been added. 
 
 = 1.2.5 =
 Fix: incorrect fee calculation.
