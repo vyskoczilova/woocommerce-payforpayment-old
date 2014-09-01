@@ -20,7 +20,7 @@ class Pay4Pay_Admin {
 
 	private function __construct() {
 		// handle options
-		add_action( 'woocommerce_init' , array( &$this , 'add_payment_options') );
+		add_action( 'woocommerce_init' , array( &$this , 'add_payment_options'), 99 );
 		add_action( 'woocommerce_update_options_checkout' , array( &$this , 'add_payment_options') );
 		
 		// payment gateways table
