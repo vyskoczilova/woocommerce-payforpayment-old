@@ -91,6 +91,11 @@ Either post it on [GitHub](https://github.com/mcguffin/wp-access-areas) or—if 
 
 == Changelog ==
 
+= 1.3.1 =
+Fix Admin: Payment gateway Class not found (may occur with 3rd party gateways)
+Fix: textdomain loading
+Update turkish localisation
+
 = 1.3.0 =
 Feature: Enhanced UI
 Feature: Select tax class to be applied to payment fee
