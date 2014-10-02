@@ -3,7 +3,7 @@
 Plugin Name: WooCommerce Pay for Payment
 Plugin URI: http://wordpress.org/plugins/woocommerce-pay-for-payment
 Description: Setup individual charges for each payment method in woocommerce.
-Version: 1.3.1
+Version: 1.3.2
 Author: Jörn Lund
 Author URI: https://github.com/mcguffin
 License: GPL
@@ -20,7 +20,8 @@ Domain Path: /languages/
 class Pay4Pay {
 
 	private static $_instance = null;
-	private $payment_fee = null;
+	private $_fee = null;
+	public $required_wc_version = '2.2.0';
 
 	public static function instance(){
 		if ( is_null(self::$_instance) )
@@ -49,8 +50,22 @@ class Pay4Pay {
 	private function __construct() {
 		load_plugin_textdomain( 'pay4pay' , false, dirname( plugin_basename( __FILE__ )) . '/languages' );
 //		add_action( 'woocommerce_cart_calculate_fees' , array($this,'add_pay4payment' ) , 99 ); // make sure this is the last fee eing added
-		add_action( 'woocommerce_calculate_totals' , array($this,'add_pay4payment' ) , 99 );
+		add_action( 'woocommerce_calculate_totals' , array($this,'calculate_pay4payment' ) , 99 );
+		add_action( 'woocommerce_cart_calculate_fees' , array($this,'add_pay4payment' ) , 99 );
 		add_action( 'woocommerce_review_order_after_submit' , array($this,'print_autoload_js') );
+		add_action( 'admin_init' , array( &$this , 'check_wc_version' ) );
+	}
+	
+	function check_wc_version() {
+		if ( ! function_exists( 'WC' ) || version_compare( WC()->version , $this->required_wc_version ) < 0 ) {
+			deactivate_plugins( plugin_basename( __FILE__ ) );
+			add_action( 'admin_notices', array( __CLASS__ , 'wc_version_notice' ) );
+		}
+	}
+	public static function wc_version_notice() {
+		?><div class="error"><p><?php 
+			_e('WooCommerce Pay4Payment requires at least WooCommerce 2.2. Please update!');
+		?></p></div><?php
 	}
 
 	function print_autoload_js(){
@@ -63,8 +78,20 @@ jQuery(document).ready(function($){
 });
  		</script><?php 
 	}
-
-	function add_pay4payment( ) {
+	function add_pay4payment( $cart ) {
+		if ( ! is_null($this->_fee) ) {
+			$cart->add_fee( $this->_fee->fee_title , 
+							$this->_fee->cost , 
+							$this->_fee->taxable , 
+							$this->_fee->tax_class
+						);
+			
+		}
+	}
+	function calculate_pay4payment( ) {
+		if ( ! is_null($this->_fee) ) {
+			return;
+		}
 		if ( ( $current_gateway = $this->get_current_gateway() ) && ( $settings = $this->get_current_gateway_settings() ) ) {
 			$settings = wp_parse_args( $settings, self::get_default_settings() );
 			
@@ -140,28 +167,23 @@ jQuery(document).ready(function($){
 						
 						$cost = apply_filters( "woocommerce_pay4pay_{$current_gateway->id}_amount" , $cost , $calculation_base , $current_gateway , $taxable , $include_taxes , $tax_class );
 						$cost = round($cost,2);
-						
+						//*
+						$this->_fee = (object) array(
+							'fee_title' => $fee_title,
+							'cost' => $cost,
+							'taxable' => $taxable,
+							'tax_class' => $tax_class,
+						);
+						$cart->calculate_totals();
+						return;
+						/*/
 						$cart->add_fee( $fee_title , 
 										$cost , 
 										$taxable , 
 										$tax_class
 									);
-						
-						/*
-						woocommerce is calculating the total from:
-							$cart->cart_contents_total 
-						+	$cart->tax_total 
-						+	$cart->shipping_tax_total 
-						+	$cart->shipping_total 
-						-	$cart->discount_total 
-						+	$cart->fee_total
-						
-						Adding a payment fee affects $cart->fee_total, $cart->tax_total and $cart->taxes.
-						so we need to (re-)calculate these values exactly the way woocommerce does.
-						
-						This is due to change.
-						*/
-						
+
+
 						// ### BEGIN woocommerce fee recalculation ####
 						// do with payment fee as in WC_Cart->calculate_fees()
 						foreach ( $cart->fees as $fee_key => $fee ) {
@@ -177,6 +199,9 @@ jQuery(document).ready(function($){
 									if ( ! empty( $fee_taxes ) ) {
 										// Set the tax total for this fee
 										$cart->fees[ $fee_key ]->tax = array_sum( $fee_taxes );
+
+										// Set tax data - Since 2.2
+										$cart->fees[ $fee_key ]->tax_data = $fee_taxes;
 
 										// Tax rows - merge the totals we just got
 										foreach ( array_keys( $cart->taxes + $fee_taxes ) as $key ) {
@@ -207,7 +232,25 @@ jQuery(document).ready(function($){
 							$cart->remove_taxes();
 						}
 						// ### END woocommerce tax recalculation ####
+
+						//*/
 						
+						/*
+						woocommerce is calculating the total from:
+							$cart->cart_contents_total 
+						+	$cart->tax_total 
+						+	$cart->shipping_tax_total 
+						+	$cart->shipping_total 
+						-	$cart->discount_total 
+						+	$cart->fee_total
+						
+						Adding a payment fee affects $cart->fee_total, $cart->tax_total and $cart->taxes.
+						so we need to (re-)calculate these values exactly the way woocommerce does.
+						
+						This is due to change.
+						*/
+						
+						//*/
 					}
 				}
 			}

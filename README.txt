@@ -24,7 +24,7 @@ You can use placeholders in the payment item title:
 - Example: `Payment Fee ([FIXED_AMOUNT] + [PERCENT_AMOUNT]% of [CART_TOTAL])`
 
 
-Requires at least woocommerce 2.1.
+Requires at least woocommerce 2.2.
 
 = Features =
 - Fixed charge and/or a percentage of cart total
@@ -91,6 +91,10 @@ Either post it on [GitHub](https://github.com/mcguffin/wp-access-areas) or—if 
 
 == Changelog ==
 
+= 1.3.2 =
+Feature: Deactivate if WooCommerce version is below requirement.
+Fix: Missing Taxes
+
 = 1.3.1 =
 Fix Admin: Payment gateway Class not found (may occur with 3rd party gateways)
 Fix: textdomain loading
@@ -144,5 +148,4 @@ Initial release
 
 
 == Upgrade notice ==
-Version 1.3.0 is a rework of the plugin. Some of the settings have changed substantially, 
-so you better check your payment gateway settings.
+Since at least WooCommerce 2.2. the cart re calculation seems be robust enough to be performed two times durign the same session.
