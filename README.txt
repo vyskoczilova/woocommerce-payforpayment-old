@@ -148,4 +148,4 @@ Initial release
 
 
 == Upgrade notice ==
-Since at least WooCommerce 2.2. the cart re calculation seems be robust enough to be performed two times durign the same session.
+Requires at least WooCommerce 2.2.
