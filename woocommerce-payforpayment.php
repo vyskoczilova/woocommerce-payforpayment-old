@@ -138,6 +138,7 @@ jQuery(document).ready(function($){
 						
 					}
 					
+					if ($cost < floatval($settings['pay4pay_charges_minimum'])) $cost = floatval($settings['pay4pay_charges_minimum']);
 					
 					$do_apply = $cost != 0;
 					$do_apply = apply_filters( "woocommerce_pay4pay_apply" , $do_apply , $cost , $calculation_base , $current_gateway );
