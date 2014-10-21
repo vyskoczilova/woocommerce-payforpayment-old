@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce Pay for Payment v0.0.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: Wed Aug 27 2014 13:29:15 GMT+0200 (CEST)\n"
+"PO-Revision-Date: Tue Oct 21 2014 11:58:36 GMT+0200 (CEST)\n"
 "Last-Translator: admin <joern@podpirate.org>\n"
 "Language-Team: \n"
 "Language: German\n"
@@ -26,12 +26,16 @@ msgstr ""
 "X-Textdomain-Support: yes\n"
 "X-Loco-Target-Locale: de_DE"
 
-#: ../woocommerce-payforpayment.php:33 ../admin/class-pay4pay-admin.php:48 ..
-#: /admin/class-pay4pay-admin.php:234
+#: ../woocommerce-payforpayment.php:34 ../admin/class-pay4pay-admin.php:48 ..
+#: /admin/class-pay4pay-admin.php:256
 msgid "Extra Charge"
 msgstr "Extra Gebühr"
 
-#: ../woocommerce-payforpayment.php:276
+#: ../woocommerce-payforpayment.php:67
+msgid "WooCommerce Pay4Payment requires at least WooCommerce 2.2. Please update!"
+msgstr "WooCommerce Pay4Payment erfordert mindestens WooCommerce 2.2. Bitte updaten!"
+
+#: ../woocommerce-payforpayment.php:305
 msgid "Standard"
 msgstr ""
 
@@ -62,84 +66,106 @@ msgid "Percentage of cart total to be added to payment."
 msgstr "Prozentsatz des Auftragswertes"
 
 #: ../admin/class-pay4pay-admin.php:82
+msgid "Charge at least"
+msgstr "Mindestgebühr"
+
+#: ../admin/class-pay4pay-admin.php:84
+msgid ""
+"Minimum extra charge to be added to cart when this payment method is "
+"selected."
+msgstr "Mindestens diesen Betrag für die gewählte Zahlungsmethode berechnen."
+
+#: ../admin/class-pay4pay-admin.php:92
+msgid "Charge at most"
+msgstr "Höchstgebühr"
+
+#: ../admin/class-pay4pay-admin.php:94
+msgid ""
+"Maximum extra charge to be added to cart when this payment method is "
+"selected. Enter zero to disable."
+msgstr ""
+"Mindestens diesen Betrag für die gewählte Zahlungsmethode berechnen. Zum "
+"deaktivieren Null eintragen."
+
+#: ../admin/class-pay4pay-admin.php:102
 msgid "Disable on Free Shipping"
 msgstr "Deaktivieren bei Versandkostenfrei"
 
-#: ../admin/class-pay4pay-admin.php:83
+#: ../admin/class-pay4pay-admin.php:103
 msgid "Don’t charge this fee when free shipping is available."
 msgstr "Gebühr wird nicht berechnet wenn Versandkostenfrei verfügbar ist."
 
-#: ../admin/class-pay4pay-admin.php:94
+#: ../admin/class-pay4pay-admin.php:114
 msgid "Extra Charge Taxes"
 msgstr "Steuern"
 
-#: ../admin/class-pay4pay-admin.php:99
+#: ../admin/class-pay4pay-admin.php:119
 msgid "Includes Taxes"
 msgstr "Enthält Steuern"
 
-#: ../admin/class-pay4pay-admin.php:101
+#: ../admin/class-pay4pay-admin.php:121
 msgid "Payment fee is taxable"
 msgstr "Gebühr wird besteuert"
 
-#: ../admin/class-pay4pay-admin.php:108
+#: ../admin/class-pay4pay-admin.php:128
 msgid "Inclusive Taxes"
 msgstr "Inclusive Steuern"
 
-#: ../admin/class-pay4pay-admin.php:110
+#: ../admin/class-pay4pay-admin.php:130
 msgid "The payment fee is inclusive of taxes."
 msgstr "Die Gebühr enthält Steuern"
 
-#: ../admin/class-pay4pay-admin.php:111
+#: ../admin/class-pay4pay-admin.php:131
 msgid ""
 "If you leave this unchecked taxes will be calculated on top of the payment "
 "fee."
 msgstr "Wenn Du den Haken weglässt, werden die Steuern zu der Gebühr hinzuaddiert."
 
-#: ../admin/class-pay4pay-admin.php:117
+#: ../admin/class-pay4pay-admin.php:137
 msgid "Tax class"
 msgstr "Steuerklasse"
 
-#: ../admin/class-pay4pay-admin.php:119
+#: ../admin/class-pay4pay-admin.php:139
 msgid "Select a the tax class applied to the extra charge."
 msgstr "Wähle aus, welche Steuerklasse auf diese Gebühr angewendet wir."
 
-#: ../admin/class-pay4pay-admin.php:132
+#: ../admin/class-pay4pay-admin.php:152
 msgid "Include in percental payment fee calculation:"
 msgstr "In prozentualer Gebühr berücksichtigen:"
 
-#: ../admin/class-pay4pay-admin.php:138
+#: ../admin/class-pay4pay-admin.php:158
 msgid "Fees"
 msgstr "Andere Gebühren"
 
-#: ../admin/class-pay4pay-admin.php:140
+#: ../admin/class-pay4pay-admin.php:160
 msgid "Include fees in calculation."
 msgstr "Andere Gebühren in die Berechnung einbeziehen"
 
-#: ../admin/class-pay4pay-admin.php:146
+#: ../admin/class-pay4pay-admin.php:166
 msgid "Coupons"
 msgstr "Rabatte"
 
-#: ../admin/class-pay4pay-admin.php:148
+#: ../admin/class-pay4pay-admin.php:168
 msgid "Include Coupons in calculation."
 msgstr "Rabatte bei der Berechnung berücksichtigen"
 
-#: ../admin/class-pay4pay-admin.php:154
+#: ../admin/class-pay4pay-admin.php:174
 msgid "Shipping"
 msgstr "Versandkosten"
 
-#: ../admin/class-pay4pay-admin.php:156
+#: ../admin/class-pay4pay-admin.php:176
 msgid "Include shipping cost in calculation."
 msgstr "Versandkosten bei der Berechnung berücksichtigen"
 
-#: ../admin/class-pay4pay-admin.php:165
+#: ../admin/class-pay4pay-admin.php:185
 msgid "Taxes"
 msgstr "Steuern"
 
-#: ../admin/class-pay4pay-admin.php:167
+#: ../admin/class-pay4pay-admin.php:187
 msgid "Include taxes in calculation."
 msgstr "Steuern bei der Berechnung berücksichtigen"
 
-#: ../admin/class-pay4pay-admin.php:246
+#: ../admin/class-pay4pay-admin.php:268
 #, php-format
 msgctxt "Gateway list column"
 msgid "%s %% of cart totals"

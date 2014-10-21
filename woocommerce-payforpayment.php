@@ -3,7 +3,7 @@
 Plugin Name: WooCommerce Pay for Payment
 Plugin URI: http://wordpress.org/plugins/woocommerce-pay-for-payment
 Description: Setup individual charges for each payment method in woocommerce.
-Version: 1.3.2
+Version: 1.3.3
 Author: Jörn Lund
 Author URI: https://github.com/mcguffin
 License: GPL
@@ -156,7 +156,17 @@ jQuery(document).ready(function($){
 							),
 							$fee_title );
 						$fee_id 	= sanitize_title( $fee_title );
-
+						
+						// apply min + max before tax calculation
+						// some people may like to use the plugin to apply a discount, so we need to handle negative values correctly
+						if ( $settings['pay4pay_charges_percentage'] ) {
+							$min_cost = isset( $settings['pay4pay_charges_minimum'] ) ? $settings['pay4pay_charges_minimum'] : -INF;
+							$max_cost = isset( $settings['pay4pay_charges_maximum'] ) && (bool) $settings['pay4pay_charges_maximum'] ? $settings['pay4pay_charges_maximum'] : INF;
+							$cost = max( $min_cost , $cost );
+							$cost = min( $max_cost , $cost );
+						}
+						
+						// WooCommerce Fee is always ex taxes. We need to subtract taxes, WC will add them again later.
 						if ( $taxable && $include_taxes ) {
 							$tax_rates = $cart->tax->get_rates( $tax_class );
 							$factor = 1;
@@ -165,8 +175,10 @@ jQuery(document).ready(function($){
 							$cost /= $factor;
 						}
 						
+						
 						$cost = apply_filters( "woocommerce_pay4pay_{$current_gateway->id}_amount" , $cost , $calculation_base , $current_gateway , $taxable , $include_taxes , $tax_class );
 						$cost = round($cost,2);
+						
 						//*
 						$this->_fee = (object) array(
 							'fee_title' => $fee_title,

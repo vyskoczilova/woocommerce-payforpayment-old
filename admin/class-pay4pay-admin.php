@@ -78,6 +78,26 @@ class Pay4Pay_Admin {
 				),
 				'id' => 'woocommerce-pay4pay-percentage',
 			),
+			'pay4pay_charges_minimum' => array(
+				'title' => __( 'Charge at least', 'pay4pay' ),
+				'type' => 'number',
+				'description' => __( 'Minimum extra charge to be added to cart when this payment method is selected.', 'pay4pay' ),
+				'desc_tip' => true,
+				'custom_attributes' => array(
+					'step' => 'any',
+					'data-dependency-notzero' => 'woocommerce-pay4pay-percentage',
+				),
+			),
+			'pay4pay_charges_maximum' => array(
+				'title' => __( 'Charge at most', 'pay4pay' ),
+				'type' => 'number',
+				'description' => __( 'Maximum extra charge to be added to cart when this payment method is selected. Enter zero to disable.', 'pay4pay' ),
+				'desc_tip' => true,
+				'custom_attributes' => array(
+					'step' => 'any',
+					'data-dependency-notzero' => 'woocommerce-pay4pay-percentage',
+				),
+			),
 			'pay4pay_disable_on_free_shipping' => array(
 				'title' => __( 'Disable on Free Shipping' , 'pay4pay' ),
 				'label' => __( 'Don’t charge this fee when free shipping is available.' , 'pay4pay' ),
@@ -195,6 +215,8 @@ class Pay4Pay_Admin {
 			'pay4pay_item_title' 				=> sanitize_text_field( $_POST[$prefix.'_pay4pay_item_title'] ),
 			'pay4pay_charges_fixed' 			=> floatval( $_POST[$prefix.'_pay4pay_charges_fixed'] ),
 			'pay4pay_charges_percentage' 		=> floatval( $_POST[$prefix.'_pay4pay_charges_percentage'] ),
+			'pay4pay_charges_minimum'			=> floatval( $_POST[$prefix.'_pay4pay_charges_minimum'] ),
+			'pay4pay_charges_maximum'			=> floatval( $_POST[$prefix.'_pay4pay_charges_maximum'] ),
 			'pay4pay_disable_on_free_shipping'	=> $this->_get_bool( $prefix.'_pay4pay_disable_on_free_shipping' ), 
 			
 			'pay4pay_taxes' 					=> $this->_get_bool( $prefix.'_pay4pay_taxes' ),
@@ -244,6 +266,11 @@ class Pay4Pay_Admin {
 					$items[] = wc_price($gateway->settings['pay4pay_charges_fixed'] );
 				if ( $gateway->settings['pay4pay_charges_percentage'] ) {
 					$items[] = sprintf( _x( '%s %% of cart totals', 'Gateway list column' , 'pay4pay' ) , $gateway->settings['pay4pay_charges_percentage'] );
+					
+					if ( isset( $gateway->settings['pay4pay_charges_minimum'] ) && $gateway->settings['pay4pay_charges_minimum'] )
+						$items[] = wc_price($gateway->settings['pay4pay_charges_minimum'] );
+					if ( isset($gateway->settings['pay4pay_charges_maximum']) && $gateway->settings['pay4pay_charges_maximum'] )
+						$items[] = wc_price($gateway->settings['pay4pay_charges_maximum'] );
 				}
 				echo implode('<br />',$items);
 			}

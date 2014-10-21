@@ -91,6 +91,9 @@ Either post it on [GitHub](https://github.com/mcguffin/wp-access-areas) or—if 
 
 == Changelog ==
 
+= 1.3.3 =
+Feature: Minimum and maximum charges.
+
 = 1.3.2 =
 Feature: Deactivate if WooCommerce version is below requirement.
 Fix: Missing Taxes
