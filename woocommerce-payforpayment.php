@@ -20,7 +20,7 @@ Domain Path: /languages/
 class Pay4Pay {
 
 	private static $_instance = null;
-	private $_fee = null;
+	private $_fee = array();
 	public $required_wc_version = '2.2.0';
 
 	public static function instance(){
@@ -68,8 +68,8 @@ class Pay4Pay {
 		?></p></div><?php
 	}
 
-	function print_autoload_js(){
-		?><script type="text/javascript">
+	function print_autoload_js() {
+		?><script type="text/javascript" id="payforpayment-refresh">
 jQuery(document).ready(function($){
 	$(document.body).on('change', 'input[name="payment_method"]', function() {
 		$('body').trigger('update_checkout');
@@ -79,190 +79,195 @@ jQuery(document).ready(function($){
  		</script><?php 
 	}
 	function add_pay4payment( $cart ) {
-		if ( ! is_null($this->_fee) ) {
-			$cart->add_fee( $this->_fee->fee_title , 
-							$this->_fee->cost , 
-							$this->_fee->taxable , 
-							$this->_fee->tax_class
-						);
+		if ( $current_gateway = $this->get_current_gateway() )	{
+			if ( isset($this->_fee[$current_gateway->id]) ) {
+				$fee = $this->_fee[$current_gateway->id];
+				$cart->add_fee( $fee->fee_title , 
+								$fee->cost , 
+								$fee->taxable , 
+								$fee->tax_class
+							);
 			
+			}
 		}
 	}
 	function calculate_pay4payment( ) {
-		if ( ! is_null($this->_fee) ) {
-			return;
-		}
-		if ( ( $current_gateway = $this->get_current_gateway() ) && ( $settings = $this->get_current_gateway_settings() ) ) {
-			$settings = wp_parse_args( $settings, self::get_default_settings() );
+		if ( $current_gateway = $this->get_current_gateway() ) {
+			if ( isset($this->_fee[$current_gateway->id]) ) {
+				return;
+			}
+			if ( ( $settings = $this->get_current_gateway_settings() ) ) {
+				$settings = wp_parse_args( $settings, self::get_default_settings() );
 			
-			$disable_on_free_shipping	= 'yes' == $settings['pay4pay_disable_on_free_shipping'];
+				$disable_on_free_shipping	= 'yes' == $settings['pay4pay_disable_on_free_shipping'];
 
-			$include_shipping			= 'yes' == $settings['pay4pay_include_shipping'];
-			$include_fees 				= 'yes' == $settings['pay4pay_enable_extra_fees'];
-			$include_coupons			= 'yes' == $settings['pay4pay_include_coupons'];
-			$include_cart_taxes 		= 'yes' == $settings['pay4pay_include_cart_taxes'];
-			$taxable					= 'yes' == $settings['pay4pay_taxes'];
-			// wc tax options
-			$calc_taxes					= 'yes' == get_option('woocommerce_calc_taxes');
-			$include_taxes				= 'yes' == $settings['pay4pay_includes_taxes'];
-			$tax_class					= $settings['pay4pay_tax_class'];
+				$include_shipping			= 'yes' == $settings['pay4pay_include_shipping'];
+				$include_fees 				= 'yes' == $settings['pay4pay_enable_extra_fees'];
+				$include_coupons			= 'yes' == $settings['pay4pay_include_coupons'];
+				$include_cart_taxes 		= 'yes' == $settings['pay4pay_include_cart_taxes'];
+				$taxable					= 'yes' == $settings['pay4pay_taxes'];
+				// wc tax options
+				$calc_taxes					= 'yes' == get_option('woocommerce_calc_taxes');
+				$include_taxes				= 'yes' == $settings['pay4pay_includes_taxes'];
+				$tax_class					= $settings['pay4pay_tax_class'];
 
-			if ( $settings['pay4pay_charges_fixed'] || $settings['pay4pay_charges_percentage'] ) {
-				$cart = WC()->cart;
-				if ( ! $disable_on_free_shipping || ! in_array( 'free_shipping' , WC()->session->get( 'chosen_shipping_methods' )) ) {
-					$cost = floatval($settings['pay4pay_charges_fixed']);
+				if ( $settings['pay4pay_charges_fixed'] || $settings['pay4pay_charges_percentage'] ) {
+					$cart = WC()->cart;
+					if ( ! $disable_on_free_shipping || ! in_array( 'free_shipping' , WC()->session->get( 'chosen_shipping_methods' )) ) {
+						$cost = floatval($settings['pay4pay_charges_fixed']);
 				
-					//  √ $this->cart_contents_total + √ $this->tax_total + √ $this->shipping_tax_total + $this->shipping_total + $this->fee_total,
-					$calculation_base = 0;
-					if ( $percent = floatval($settings['pay4pay_charges_percentage']) ) {
+						//  √ $this->cart_contents_total + √ $this->tax_total + √ $this->shipping_tax_total + $this->shipping_total + $this->fee_total,
+						$calculation_base = 0;
+						if ( $percent = floatval($settings['pay4pay_charges_percentage']) ) {
 						
 						
-						$calculation_base = $cart->subtotal_ex_tax;
+							$calculation_base = $cart->subtotal_ex_tax;
 						
-						if ( $include_shipping )
-							$calculation_base += $cart->shipping_total;
-
-						if ( $include_fees )
-							$calculation_base += $cart->fee_total;
-
-						if ( $include_coupons )
-							$calculation_base -= $cart->discount_total + $cart->discount_cart;
-						
-						if ( $include_cart_taxes ) {
-							$calculation_base += $cart->tax_total;
 							if ( $include_shipping )
-								$calculation_base += $cart->shipping_tax_total;
+								$calculation_base += $cart->shipping_total;
+
+							if ( $include_fees )
+								$calculation_base += $cart->fee_total;
+
+							if ( $include_coupons )
+								$calculation_base -= $cart->discount_total + $cart->discount_cart;
+						
+							if ( $include_cart_taxes ) {
+								$calculation_base += $cart->tax_total;
+								if ( $include_shipping )
+									$calculation_base += $cart->shipping_tax_total;
+							}
+						
+							$cost += $calculation_base * ($percent / 100 );
+						
 						}
-						
-						$cost += $calculation_base * ($percent / 100 );
-						
-					}
 					
 					
-					$do_apply = $cost != 0;
-					$do_apply = apply_filters( "woocommerce_pay4pay_apply" , $do_apply , $cost , $calculation_base , $current_gateway );
-					$do_apply = apply_filters( "woocommerce_pay4pay_applyfor_{$current_gateway->id}" , $do_apply , $cost , $calculation_base , $current_gateway );
+						$do_apply = $cost != 0;
+						$do_apply = apply_filters( "woocommerce_pay4pay_apply" , $do_apply , $cost , $calculation_base , $current_gateway );
+						$do_apply = apply_filters( "woocommerce_pay4pay_applyfor_{$current_gateway->id}" , $do_apply , $cost , $calculation_base , $current_gateway );
 					
-					if ( $do_apply ) {
-						// make our fee being displayed in the order total
-						$fee_title	= $settings['pay4pay_item_title'] ? $settings['pay4pay_item_title'] : $current_gateway->title;
+						if ( $do_apply ) {
+							// make our fee being displayed in the order total
+							$fee_title	= $settings['pay4pay_item_title'] ? $settings['pay4pay_item_title'] : $current_gateway->title;
 
-						$fee_title	= str_replace( 
-							array('[FIXED_AMOUNT]','[PERCENT_AMOUNT]','[CART_TOTAL]') , 
-							array(
-								strip_tags( wc_price( $settings['pay4pay_charges_fixed'] ) ) , 
-								floatval( $settings['pay4pay_charges_percentage'] ), 
-								strip_tags(wc_price($calculation_base)) , 
-							),
-							$fee_title );
-						$fee_id 	= sanitize_title( $fee_title );
+							$fee_title	= str_replace( 
+								array('[FIXED_AMOUNT]','[PERCENT_AMOUNT]','[CART_TOTAL]') , 
+								array(
+									strip_tags( wc_price( $settings['pay4pay_charges_fixed'] ) ) , 
+									floatval( $settings['pay4pay_charges_percentage'] ), 
+									strip_tags(wc_price($calculation_base)) , 
+								),
+								$fee_title );
+							$fee_id 	= sanitize_title( $fee_title );
 						
-						// apply min + max before tax calculation
-						// some people may like to use the plugin to apply a discount, so we need to handle negative values correctly
-						if ( $settings['pay4pay_charges_percentage'] ) {
-							$min_cost = isset( $settings['pay4pay_charges_minimum'] ) ? $settings['pay4pay_charges_minimum'] : -INF;
-							$max_cost = isset( $settings['pay4pay_charges_maximum'] ) && (bool) $settings['pay4pay_charges_maximum'] ? $settings['pay4pay_charges_maximum'] : INF;
-							$cost = max( $min_cost , $cost );
-							$cost = min( $max_cost , $cost );
-						}
+							// apply min + max before tax calculation
+							// some people may like to use the plugin to apply a discount, so we need to handle negative values correctly
+							if ( $settings['pay4pay_charges_percentage'] ) {
+								$min_cost = isset( $settings['pay4pay_charges_minimum'] ) ? $settings['pay4pay_charges_minimum'] : -INF;
+								$max_cost = isset( $settings['pay4pay_charges_maximum'] ) && (bool) $settings['pay4pay_charges_maximum'] ? $settings['pay4pay_charges_maximum'] : INF;
+								$cost = max( $min_cost , $cost );
+								$cost = min( $max_cost , $cost );
+							}
 						
-						// WooCommerce Fee is always ex taxes. We need to subtract taxes, WC will add them again later.
-						if ( $taxable && $include_taxes ) {
-							$tax_rates = $cart->tax->get_rates( $tax_class );
-							$factor = 1;
-							foreach ( $tax_rates as $rate )
-								$factor += $rate['rate']/100;
-							$cost /= $factor;
-						}
+							// WooCommerce Fee is always ex taxes. We need to subtract taxes, WC will add them again later.
+							if ( $taxable && $include_taxes ) {
+								$tax_rates = $cart->tax->get_rates( $tax_class );
+								$factor = 1;
+								foreach ( $tax_rates as $rate )
+									$factor += $rate['rate']/100;
+								$cost /= $factor;
+							}
 						
 						
-						$cost = apply_filters( "woocommerce_pay4pay_{$current_gateway->id}_amount" , $cost , $calculation_base , $current_gateway , $taxable , $include_taxes , $tax_class );
-						$cost = round($cost,2);
+							$cost = apply_filters( "woocommerce_pay4pay_{$current_gateway->id}_amount" , $cost , $calculation_base , $current_gateway , $taxable , $include_taxes , $tax_class );
+							$cost = round($cost,2);
 						
-						//*
-						$this->_fee = (object) array(
-							'fee_title' => $fee_title,
-							'cost' => $cost,
-							'taxable' => $taxable,
-							'tax_class' => $tax_class,
-						);
-						$cart->calculate_totals();
-						return;
-						/*/
-						$cart->add_fee( $fee_title , 
-										$cost , 
-										$taxable , 
-										$tax_class
-									);
+							//*
+							$this->_fee[$current_gateway->id] = (object) array(
+								'fee_title' => $fee_title,
+								'cost' => $cost,
+								'taxable' => $taxable,
+								'tax_class' => $tax_class,
+							);
+							$cart->calculate_totals();
+							return;
+							/*/
+							$cart->add_fee( $fee_title , 
+											$cost , 
+											$taxable , 
+											$tax_class
+										);
 
 
-						// ### BEGIN woocommerce fee recalculation ####
-						// do with payment fee as in WC_Cart->calculate_fees()
-						foreach ( $cart->fees as $fee_key => $fee ) {
-							// our fee:
-							if ( $fee->id == $fee_id ) {
-								// add fee to total
-								$cart->fee_total += $fee->amount;
+							// ### BEGIN woocommerce fee recalculation ####
+							// do with payment fee as in WC_Cart->calculate_fees()
+							foreach ( $cart->fees as $fee_key => $fee ) {
+								// our fee:
+								if ( $fee->id == $fee_id ) {
+									// add fee to total
+									$cart->fee_total += $fee->amount;
 								
-								if ( $fee->taxable ) {
-									$tax_rates = $cart->tax->get_rates( $fee->tax_class );
-									$fee_taxes = $cart->tax->calc_tax( $fee->amount, $tax_rates, false );
+									if ( $fee->taxable ) {
+										$tax_rates = $cart->tax->get_rates( $fee->tax_class );
+										$fee_taxes = $cart->tax->calc_tax( $fee->amount, $tax_rates, false );
 					
-									if ( ! empty( $fee_taxes ) ) {
-										// Set the tax total for this fee
-										$cart->fees[ $fee_key ]->tax = array_sum( $fee_taxes );
+										if ( ! empty( $fee_taxes ) ) {
+											// Set the tax total for this fee
+											$cart->fees[ $fee_key ]->tax = array_sum( $fee_taxes );
 
-										// Set tax data - Since 2.2
-										$cart->fees[ $fee_key ]->tax_data = $fee_taxes;
+											// Set tax data - Since 2.2
+											$cart->fees[ $fee_key ]->tax_data = $fee_taxes;
 
-										// Tax rows - merge the totals we just got
-										foreach ( array_keys( $cart->taxes + $fee_taxes ) as $key ) {
-											$cart->taxes[ $key ] = ( isset( $fee_taxes[ $key ] ) ? $fee_taxes[ $key ] : 0 ) + ( isset( $cart->taxes[ $key ] ) ? $cart->taxes[ $key ] : 0 );
+											// Tax rows - merge the totals we just got
+											foreach ( array_keys( $cart->taxes + $fee_taxes ) as $key ) {
+												$cart->taxes[ $key ] = ( isset( $fee_taxes[ $key ] ) ? $fee_taxes[ $key ] : 0 ) + ( isset( $cart->taxes[ $key ] ) ? $cart->taxes[ $key ] : 0 );
+											}
 										}
 									}
+									break;
 								}
-								break;
 							}
-						}
-						// ### END woocommerce fee recalculation ####
+							// ### END woocommerce fee recalculation ####
 
-						// ### BEGIN woocommerce tax recalculation ####
-						// Total up/round taxes and shipping taxes
-						// calc taxes as seen in WC_Cart->calculate_totals()
-						if ( $cart->round_at_subtotal ) {
-							$cart->tax_total          = $cart->tax->get_tax_total( $cart->taxes );
-						//	$cart->shipping_tax_total = $cart->tax->get_tax_total( $cart->shipping_taxes );
-							$cart->taxes              = array_map( array( $cart->tax, 'round' ), $cart->taxes );
-						//	$cart->shipping_taxes     = array_map( array( $cart->tax, 'round' ), $cart->shipping_taxes );
-						} else {
-							$cart->tax_total          = array_sum( $cart->taxes );
-						//	$cart->shipping_tax_total = array_sum( $cart->shipping_taxes );
-						}
+							// ### BEGIN woocommerce tax recalculation ####
+							// Total up/round taxes and shipping taxes
+							// calc taxes as seen in WC_Cart->calculate_totals()
+							if ( $cart->round_at_subtotal ) {
+								$cart->tax_total          = $cart->tax->get_tax_total( $cart->taxes );
+							//	$cart->shipping_tax_total = $cart->tax->get_tax_total( $cart->shipping_taxes );
+								$cart->taxes              = array_map( array( $cart->tax, 'round' ), $cart->taxes );
+							//	$cart->shipping_taxes     = array_map( array( $cart->tax, 'round' ), $cart->shipping_taxes );
+							} else {
+								$cart->tax_total          = array_sum( $cart->taxes );
+							//	$cart->shipping_tax_total = array_sum( $cart->shipping_taxes );
+							}
 
-						// VAT exemption done at this point - so all totals are correct before exemption
-						if ( WC()->customer->is_vat_exempt() ) {
-							$cart->remove_taxes();
-						}
-						// ### END woocommerce tax recalculation ####
+							// VAT exemption done at this point - so all totals are correct before exemption
+							if ( WC()->customer->is_vat_exempt() ) {
+								$cart->remove_taxes();
+							}
+							// ### END woocommerce tax recalculation ####
 
-						//*/
+							//*/
 						
-						/*
-						woocommerce is calculating the total from:
-							$cart->cart_contents_total 
-						+	$cart->tax_total 
-						+	$cart->shipping_tax_total 
-						+	$cart->shipping_total 
-						-	$cart->discount_total 
-						+	$cart->fee_total
+							/*
+							woocommerce is calculating the total from:
+								$cart->cart_contents_total 
+							+	$cart->tax_total 
+							+	$cart->shipping_tax_total 
+							+	$cart->shipping_total 
+							-	$cart->discount_total 
+							+	$cart->fee_total
 						
-						Adding a payment fee affects $cart->fee_total, $cart->tax_total and $cart->taxes.
-						so we need to (re-)calculate these values exactly the way woocommerce does.
+							Adding a payment fee affects $cart->fee_total, $cart->tax_total and $cart->taxes.
+							so we need to (re-)calculate these values exactly the way woocommerce does.
 						
-						This is due to change.
-						*/
+							This is due to change.
+							*/
 						
-						//*/
+							//*/
+						}
 					}
 				}
 			}
