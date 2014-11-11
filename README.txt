@@ -31,10 +31,12 @@ Requires at least woocommerce 2.2.
 - Translations in German, Spanish ([muchas graçias!](https://github.com/GosserBox)) and Turkish localization ([çok](https://www.transifex.com/accounts/profile/TRFlavourart/) [teşekkürler!](https://github.com/TRRF))
 - Plugin API. See [GitHub](https://github.com/mcguffin/woocommerce-payforpayment) for details.
 
-= Limitations =
+= Limitations and Known Issues =
 - Better not use it with paypal. (Legal issue, see FAQ as well.)
+- There is a [nasty little bug](https://wordpress.org/support/topic/plugin-stopped-working-not-saving-correctly?replies=4) 
+  when used in combination with WPML String Translation Plugin. [Here is a fix](https://gist.github.com/mcguffin/2d30eac6a0b79e457898) (unpack it, re-pack it as a zip and install it like a regular plugin)
 
-Latest files on [GitHub](http://codex.wordpress.org/Managing_Plugins).
+Latest files on [GitHub](https://github.com/mcguffin/woocommerce-payforpayment).
 
 
 == Installation ==

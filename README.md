@@ -12,6 +12,7 @@ You will find a stable version in [WordPress plugin directory](http://wordpress.
 Features
 --------
 - Fixed charge and/or a percentage of cart total
+- Min and max charge
 - Translation ready
 - German, Spanish ([muchas graçias!](https://github.com/GosserBox)) and Turkish localization ([çok teşekkürler!](https://github.com/TRRF))
 
@@ -65,7 +66,7 @@ Handle if a payment fee on a specific payment method should be applied.
 
 Compatibility
 -------------
-- Tested up to WP 4.0-beta3 / WC 2.1.12
+- Tested up to WP 4.1-alpha-30297 / WC 2.1.12
 - Requires at least WooCommerce 2.1
 - Not compatible with PayPal policy. Details: [PayPal User Agreement](https://www.paypal.com/webapps/mpp/ua/useragreement-full?country.x=US&locale.x=en_US#4), > "4.6 No Surcharges". You have been warned.
-
+- [Issue](https://wordpress.org/support/topic/plugin-stopped-working-not-saving-correctly) when used in cobmination with WPML String Translation. [There is a Workaround](https://gist.github.com/mcguffin/2d30eac6a0b79e457898)
