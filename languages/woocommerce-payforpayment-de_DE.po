@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce Pay for Payment v0.0.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: Fri Nov 14 2014 11:20:14 GMT+0100 (CET)\n"
+"PO-Revision-Date: Fri Nov 14 2014 11:20:59 GMT+0100 (CET)\n"
 "Last-Translator: admin <joern@podpirate.org>\n"
 "Language-Team: \n"
 "Language: German\n"
@@ -59,7 +59,7 @@ msgstr ""
 
 #: ../admin/class-pay4pay-admin.php:69
 msgid "Percent charge"
-msgstr "Prozentsatz"
+msgstr "Prozentuale Gebühr"
 
 #: ../admin/class-pay4pay-admin.php:71
 msgid "Percentage of cart total to be added to payment."
