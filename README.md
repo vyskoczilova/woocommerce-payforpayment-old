@@ -72,7 +72,7 @@ Compatibility
 Support
 -------
 You like what you see? Maybe you already make some money with it? 
-Here are two ways that keep me rocking:
+Here are two options to keep me rocking:
 
 <a href="http://flattr.com/thing/3468992/mcguffinwoocommerce-payforpayment-on-GitHub" target="_blank"><img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a>
 <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=F8NKC6TCASUXE"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!" /></a>
