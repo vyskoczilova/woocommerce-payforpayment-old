@@ -45,30 +45,30 @@ class Pay4Pay_Admin {
 		// general
 		$form_fields = array(
 			'pay4pay_title' => array(
-				'title' => __( 'Extra Charge', 'pay4pay' ),
+				'title' => __( 'Extra Charge', 'woocommerce-payforpayment' ),
 				'type' => 'title',
 				'class' => 'pay4pay-title',
 				'description' => '',
 			),
 			'pay4pay_item_title' => array(
-				'title' => __( 'Item Title', 'pay4pay' ),
+				'title' => __( 'Item Title', 'woocommerce-payforpayment' ),
 				'type' => 'text',
-				'description' => __( 'This will show up in the shopping basket.', 'pay4pay' ),
+				'description' => __( 'This will show up in the shopping basket.', 'woocommerce-payforpayment' ),
 				'desc_tip' => true,
 			),
 			'pay4pay_charges_fixed' => array(
-				'title' => __( 'Fixed charge', 'pay4pay' ),
+				'title' => __( 'Fixed charge', 'woocommerce-payforpayment' ),
 				'type' => 'number',
-				'description' => __( 'Extra charge to be added to cart when this payment method is selected.', 'pay4pay' ),
+				'description' => __( 'Extra charge to be added to cart when this payment method is selected.', 'woocommerce-payforpayment' ),
 				'desc_tip' => true,
 				'custom_attributes' => array(
 					'step' => 'any',
 				),
 			),
 			'pay4pay_charges_percentage' => array(
-				'title' => __( 'Percent charge', 'pay4pay' ),
+				'title' => __( 'Percent charge', 'woocommerce-payforpayment' ),
 				'type' => 'number',
-				'description' => __( 'Percentage of cart total to be added to payment.', 'pay4pay' ),
+				'description' => __( 'Percentage of cart total to be added to payment.', 'woocommerce-payforpayment' ),
 				'desc_tip' => true,
 				'custom_attributes' => array(
 					'step' => 'any',
@@ -79,9 +79,9 @@ class Pay4Pay_Admin {
 				'id' => 'woocommerce-pay4pay-percentage',
 			),
 			'pay4pay_charges_minimum' => array(
-				'title' => __( 'Charge at least', 'pay4pay' ),
+				'title' => __( 'Charge at least', 'woocommerce-payforpayment' ),
 				'type' => 'number',
-				'description' => __( 'Minimum extra charge to be added to cart when this payment method is selected.', 'pay4pay' ),
+				'description' => __( 'Minimum extra charge to be added to cart when this payment method is selected.', 'woocommerce-payforpayment' ),
 				'desc_tip' => true,
 				'custom_attributes' => array(
 					'step' => 'any',
@@ -89,9 +89,9 @@ class Pay4Pay_Admin {
 				),
 			),
 			'pay4pay_charges_maximum' => array(
-				'title' => __( 'Charge at most', 'pay4pay' ),
+				'title' => __( 'Charge at most', 'woocommerce-payforpayment' ),
 				'type' => 'number',
-				'description' => __( 'Maximum extra charge to be added to cart when this payment method is selected. Enter zero to disable.', 'pay4pay' ),
+				'description' => __( 'Maximum extra charge to be added to cart when this payment method is selected. Enter zero to disable.', 'woocommerce-payforpayment' ),
 				'desc_tip' => true,
 				'custom_attributes' => array(
 					'step' => 'any',
@@ -99,8 +99,8 @@ class Pay4Pay_Admin {
 				),
 			),
 			'pay4pay_disable_on_free_shipping' => array(
-				'title' => __( 'Disable on Free Shipping' , 'pay4pay' ),
-				'label' => __( 'Don’t charge this fee when free shipping is available.' , 'pay4pay' ),
+				'title' => __( 'Disable on Free Shipping' , 'woocommerce-payforpayment' ),
+				'label' => __( 'Don’t charge this fee when free shipping is available.' , 'woocommerce-payforpayment' ),
 				'type' => 'checkbox',
 				'desc_tip' => true,
 			),
@@ -111,32 +111,32 @@ class Pay4Pay_Admin {
 		if ( 'yes' == get_option('woocommerce_calc_taxes') ) {
 			$form_fields += array(
 				'pay4pay_title_taxes' => array(
-					'title' => __( 'Extra Charge Taxes', 'pay4pay' ),
+					'title' => __( 'Extra Charge Taxes', 'woocommerce-payforpayment' ),
 					'type' => 'title',
 					'class' => 'pay4pay-title',
 				),
 				'pay4pay_taxes' => array(
-					'title' => __('Includes Taxes','pay4pay'),
+					'title' => __('Taxable','woocommerce-payforpayment' ),
 					'type' => 'checkbox',
-					'label' => __( 'Payment fee is taxable', 'pay4pay' ),
+					'label' => __( 'Payment fee is taxable', 'woocommerce-payforpayment' ),
 					'custom_attributes' => array( 
 						'data-setchangehandler' => '1' ,  
 						'data-reference-name' => 'woocommerce-pay4pay-taxes',
 					),
 				),
 				'pay4pay_includes_taxes' => array(
-					'title' => __('Inclusive Taxes','pay4pay'),
+					'title' => __('Inclusive Taxes','woocommerce-payforpayment' ),
 					'type' => 'checkbox',
-					'label' => __( 'The payment fee is inclusive of taxes.', 'pay4pay' ),
-					'description' => __('If you leave this unchecked taxes will be calculated on top of the payment fee.' , 'pay4pay' ),
+					'label' => __( 'The payment fee is inclusive of taxes.', 'woocommerce-payforpayment' ),
+					'description' => __('If you leave this unchecked taxes will be calculated on top of the payment fee.' , 'woocommerce-payforpayment' ),
 					'desc_tip' => true,
 					'class' => 'pay4pay_taxes',
 					'custom_attributes' => array( 'data-dependency-notzero' => 'woocommerce-pay4pay-taxes' ),
 				),
 				'pay4pay_tax_class' => array(
-					'title' => __('Tax class','pay4pay'),
+					'title' => __('Tax class','woocommerce-payforpayment' ),
 					'type' => 'select',
-					'description' => __( 'Select a the tax class applied to the extra charge.', 'pay4pay' ),
+					'description' => __( 'Select a the tax class applied to the extra charge.', 'woocommerce-payforpayment' ),
 					'options' => $tax_class_options,
 					'desc_tip' => true,
 					'class' => 'pay4pay_taxes', // display when pay4pay_taxes != 0
@@ -149,31 +149,31 @@ class Pay4Pay_Admin {
 		$form_fields += array(
 			// which cart items to include in calculation
 			'pay4pay_title_include' => array(
-				'title' => __( 'Include in percental payment fee calculation:', 'pay4pay' ),
+				'title' => __( 'Include in percental payment fee calculation:', 'woocommerce-payforpayment' ),
 				'type' => 'title',
 				'class' => 'pay4pay-title dependency-notzero-woocommerce-pay4pay-percentage',
 				'custom_attributes' => array( 'data-dependency-notzero' => 'woocommerce-pay4pay-percentage' ),
 			),
 			'pay4pay_enable_extra_fees' => array( 
-				'title' => __('Fees','pay4pay'),
+				'title' => __('Fees','woocommerce-payforpayment' ),
 				'type' => 'checkbox',
-				'label' => __( 'Include fees in calculation.', 'pay4pay' ),
+				'label' => __( 'Include fees in calculation.', 'woocommerce-payforpayment' ),
 				'desc_tip' => true,
 				'class' => 'pay4pay_charges_percentage',
 				'custom_attributes' => array( 'data-dependency-notzero' => 'woocommerce-pay4pay-percentage' ),
 			),
 			'pay4pay_include_coupons' => array(
-				'title' => __('Coupons','pay4pay'),
+				'title' => __('Coupons','woocommerce-payforpayment' ),
 				'type' => 'checkbox',
-				'label' => __( 'Include Coupons in calculation.', 'pay4pay' ),
+				'label' => __( 'Include Coupons in calculation.', 'woocommerce-payforpayment' ),
 				'desc_tip' => true,
 				'class' => 'pay4pay_charges_percentage',
 				'custom_attributes' => array( 'data-dependency-notzero' => 'woocommerce-pay4pay-percentage' ),
 			),
 			'pay4pay_include_shipping' => array(
-				'title' => __('Shipping','pay4pay'),
+				'title' => __('Shipping','woocommerce-payforpayment' ),
 				'type' => 'checkbox',
-				'label' => __( 'Include shipping cost in calculation.', 'pay4pay' ),
+				'label' => __( 'Include shipping cost in calculation.', 'woocommerce-payforpayment' ),
 				'desc_tip' => true,
 				'class' => 'pay4pay_charges_percentage',
 				'custom_attributes' => array( 'data-dependency-notzero' => 'woocommerce-pay4pay-percentage' ),
@@ -182,9 +182,9 @@ class Pay4Pay_Admin {
 		if ( 'yes' == get_option('woocommerce_calc_taxes') ) {
 			$form_fields += array(
 				'pay4pay_include_cart_taxes' => array(
-					'title' => __('Taxes','pay4pay'),
+					'title' => __('Taxes','woocommerce-payforpayment' ),
 					'type' => 'checkbox',
-					'label' => __( 'Include taxes in calculation.', 'pay4pay' ),
+					'label' => __( 'Include taxes in calculation.', 'woocommerce-payforpayment' ),
 					'desc_tip' => true,
 					'class' => 'pay4pay_charges_percentage',
 					'custom_attributes' => array( 'data-dependency-notzero' => 'woocommerce-pay4pay-percentage' ),
@@ -253,7 +253,7 @@ class Pay4Pay_Admin {
 	*/
 	public function add_extra_fee_column( $columns ){
 		$return = array_slice($columns,0,-1,true)
-			+ array( 'pay4pay_extra' => __( 'Extra Charge', 'pay4pay' ) )
+			+ array( 'pay4pay_extra' => __( 'Extra Charge', 'woocommerce-payforpayment' ) )
 			+ array_slice($columns,-1,1,true);
 		return $return;
 	}

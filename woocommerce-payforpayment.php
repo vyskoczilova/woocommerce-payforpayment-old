@@ -7,8 +7,6 @@ Version: 1.3.3
 Author: Jörn Lund
 Author URI: https://github.com/mcguffin
 License: GPL
-Text Domain: pay4pay
-Domain Path: /languages/
 */
 
 /**
@@ -31,7 +29,7 @@ class Pay4Pay {
 	
 	public static function get_default_settings() {
 		return array(
-			'pay4pay_item_title' => __( 'Extra Charge' , 'pay4pay' ),
+			'pay4pay_item_title' => __( 'Extra Charge' , 'woocommerce-payforpayment' ),
 			'pay4pay_charges_fixed' => 0,
 			'pay4pay_charges_percentage' => 0,
 			'pay4pay_disable_on_free_shipping' => 'no',
@@ -48,7 +46,7 @@ class Pay4Pay {
 	}
 
 	private function __construct() {
-		load_plugin_textdomain( 'pay4pay' , false, dirname( plugin_basename( __FILE__ )) . '/languages' );
+		load_plugin_textdomain( 'woocommerce-payforpayment' , false, dirname( plugin_basename( __FILE__ )) . '/languages' );
 //		add_action( 'woocommerce_cart_calculate_fees' , array($this,'add_pay4payment' ) , 99 ); // make sure this is the last fee eing added
 		add_action( 'woocommerce_calculate_totals' , array($this,'calculate_pay4payment' ) , 99 );
 		add_action( 'woocommerce_cart_calculate_fees' , array($this,'add_pay4payment' ) , 99 );
