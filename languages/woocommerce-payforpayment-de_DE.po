@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce Pay for Payment v0.0.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: Fri Nov 14 2014 08:29:39 GMT+0100 (CET)\n"
+"PO-Revision-Date: Fri Nov 14 2014 11:20:14 GMT+0100 (CET)\n"
 "Last-Translator: admin <joern@podpirate.org>\n"
 "Language-Team: \n"
 "Language: German\n"
@@ -26,18 +26,18 @@ msgstr ""
 "X-Textdomain-Support: yes\n"
 "X-Loco-Target-Locale: de_DE"
 
-#: ../woocommerce-payforpayment.php:305
-msgid "Standard"
-msgstr "Standard"
-
-#: ../woocommerce-payforpayment.php:34 ../admin/class-pay4pay-admin.php:48 ..
-#: admin/class-pay4pay-admin.php:256
+#: ../woocommerce-payforpayment.php:32 ../admin/class-pay4pay-admin.php:48 ..
+#: /admin/class-pay4pay-admin.php:256
 msgid "Extra Charge"
 msgstr "Extra Gebühr"
 
-#: ../woocommerce-payforpayment.php:67
+#: ../woocommerce-payforpayment.php:69
 msgid "WooCommerce Pay4Payment requires at least WooCommerce 2.2. Please update!"
 msgstr "WooCommerce Pay4Payment erfordert mindestens WooCommerce 2.2. Bitte updaten!"
+
+#: ../woocommerce-payforpayment.php:307
+msgid "Standard"
+msgstr "Standard"
 
 #: ../admin/class-pay4pay-admin.php:54
 msgid "Item Title"
@@ -84,7 +84,7 @@ msgid ""
 "Maximum extra charge to be added to cart when this payment method is "
 "selected. Enter zero to disable."
 msgstr ""
-"Mindestens diesen Betrag für die gewählte Zahlungsmethode berechnen. Zum "
+"Höchstens diesen Betrag für die gewählte Zahlungsmethode berechnen. Zum "
 "deaktivieren Null eintragen."
 
 #: ../admin/class-pay4pay-admin.php:102
@@ -100,8 +100,8 @@ msgid "Extra Charge Taxes"
 msgstr "Steuern"
 
 #: ../admin/class-pay4pay-admin.php:119
-msgid "Includes Taxes"
-msgstr "Enthält Steuern"
+msgid "Taxable"
+msgstr ""
 
 #: ../admin/class-pay4pay-admin.php:121
 msgid "Payment fee is taxable"
@@ -143,11 +143,11 @@ msgstr "Andere Gebühren in die Berechnung einbeziehen"
 
 #: ../admin/class-pay4pay-admin.php:166
 msgid "Coupons"
-msgstr "Rabatte"
+msgstr "Gutscheine"
 
 #: ../admin/class-pay4pay-admin.php:168
 msgid "Include Coupons in calculation."
-msgstr "Rabatte bei der Berechnung berücksichtigen"
+msgstr "Gutscheine bei der Berechnung berücksichtigen"
 
 #: ../admin/class-pay4pay-admin.php:174
 msgid "Shipping"

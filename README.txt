@@ -91,38 +91,42 @@ Either post it on [GitHub](https://github.com/mcguffin/wp-access-areas) or—if 
 
 == Changelog ==
 
+= 1.3.4 =
+- Code Refactoring: set plugin textdomain to plugin slug
+- Translations: Minor correction in español and german translations
+
 = 1.3.3 =
-Feature: Minimum and maximum charges.
+- Feature: Minimum and maximum charges.
 
 = 1.3.2 =
-Feature: Deactivate if WooCommerce version is below requirement.
-Fix: Missing Taxes
+- Feature: Deactivate if WooCommerce version is below requirement.
+- Fix: Missing Taxes
 
 = 1.3.1 =
-Fix Admin: Payment gateway Class not found (may occur with 3rd party gateways)
-Fix: textdomain loading
-Update turkish localisation
+- Fix Admin: Payment gateway Class not found (may occur with 3rd party gateways)
+- Fix: textdomain loading
+- Update turkish localisation
 
 = 1.3.0 =
-Feature: Enhanced UI
-Feature: Select tax class to be applied to payment fee
-Feature: Select if cart taxes will be included on payment fee calculation
-Feature: Placeholders in fee title.
-Fixes: completely repeat all woocommerce tax and fee calculation steps after payment fee has been added. 
+- Feature: Enhanced UI
+- Feature: Select tax class to be applied to payment fee
+- Feature: Select if cart taxes will be included on payment fee calculation
+- Feature: Placeholders in fee title.
+- Fixes: completely repeat all woocommerce tax and fee calculation steps after payment fee has been added. 
 
 = 1.2.5 =
-Fix: incorrect fee calculation.
+- Fix: incorrect fee calculation.
 
 = 1.2.3 =
-Fix: Safely Restrict payment fee to 2 Decimals.
+- Fix: Safely Restrict payment fee to 2 Decimals.
 
 = 1.2.2 =
-Fix: [Calculate taxes](http://wordpress.org/support/topic/cant-use-the-plugin-generate-false-amount-in-adding)
-Fix: cart contents taxes and shipping taxes included into fee calculation
-Refactoring: Discard cart_has_fee() check, as it is already done by woocommerce
+- Fix: [Calculate taxes](http://wordpress.org/support/topic/cant-use-the-plugin-generate-false-amount-in-adding)
+- Fix: cart contents taxes and shipping taxes included into fee calculation
+- Refactoring: Discard cart_has_fee() check, as it is already done by woocommerce
 
 = 1.2.1 =
-Feature: [Calculate custom fee](http://wordpress.org/support/topic/not-calculating-custom-fees)
+- Feature: [Calculate custom fee](http://wordpress.org/support/topic/not-calculating-custom-fees)
 
 = 1.2.0 =
 - Feature: add option to disable payment fee when free shipping is selected
@@ -144,10 +148,10 @@ Feature: [Calculate custom fee](http://wordpress.org/support/topic/not-calculati
 - Updated turkish translation ([Thanks a lot!](https://www.transifex.com/accounts/profile/TRFlavourart/))
 
 = 1.0.1 =
-Fix plugin URL
+- Fix plugin URL
 
 = 1.0.0 =
-Initial release
+- Initial release
 
 
 == Upgrade notice ==
