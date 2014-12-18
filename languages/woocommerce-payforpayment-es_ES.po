@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce Pay for Payment v1.3.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: Fri Nov 14 2014 09:27:57 GMT+0100 (CET)\n"
+"PO-Revision-Date: Thu Dec 18 2014 14:51:24 GMT+0100 (CET)\n"
 "Last-Translator: admin <joern@podpirate.org>\n"
 "Language-Team: \n"
 "Language: Spanish\n"
@@ -29,6 +29,8 @@ msgstr ""
 #: ../woocommerce-payforpayment.php:67
 msgid "WooCommerce Pay4Payment requires at least WooCommerce 2.2. Please update!"
 msgstr ""
+"WooCommerce Pay4Payment requiere WooCommerce 2.2 o superior. Por favor "
+"¡actualice!"
 
 #: ../woocommerce-payforpayment.php:305
 msgid "Standard"
