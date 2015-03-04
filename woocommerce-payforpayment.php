@@ -181,7 +181,6 @@ jQuery(document).ready(function($){
 						$cost = apply_filters( "woocommerce_pay4pay_{$current_gateway->id}_amount" , $cost , $calculation_base , $current_gateway , $taxable , $include_taxes , $tax_class );
 						$cost = round($cost,2);
 						
-						//*
 						$this->_fee = (object) array(
 							'fee_title' => $fee_title,
 							'cost' => $cost,
@@ -190,92 +189,19 @@ jQuery(document).ready(function($){
 						);
 						$cart->calculate_totals();
 						return;
-						/*/
-						$cart->add_fee( $fee_title , 
-										$cost , 
-										$taxable , 
-										$tax_class
-									);
-
-
-						// ### BEGIN woocommerce fee recalculation ####
-						// do with payment fee as in WC_Cart->calculate_fees()
-						foreach ( $cart->fees as $fee_key => $fee ) {
-							// our fee:
-							if ( $fee->id == $fee_id ) {
-								// add fee to total
-								$cart->fee_total += $fee->amount;
-								
-								if ( $fee->taxable ) {
-									$tax_rates = $cart->tax->get_rates( $fee->tax_class );
-									$fee_taxes = $cart->tax->calc_tax( $fee->amount, $tax_rates, false );
-					
-									if ( ! empty( $fee_taxes ) ) {
-										// Set the tax total for this fee
-										$cart->fees[ $fee_key ]->tax = array_sum( $fee_taxes );
-
-										// Set tax data - Since 2.2
-										$cart->fees[ $fee_key ]->tax_data = $fee_taxes;
-
-										// Tax rows - merge the totals we just got
-										foreach ( array_keys( $cart->taxes + $fee_taxes ) as $key ) {
-											$cart->taxes[ $key ] = ( isset( $fee_taxes[ $key ] ) ? $fee_taxes[ $key ] : 0 ) + ( isset( $cart->taxes[ $key ] ) ? $cart->taxes[ $key ] : 0 );
-										}
-									}
-								}
-								break;
-							}
-						}
-						// ### END woocommerce fee recalculation ####
-
-						// ### BEGIN woocommerce tax recalculation ####
-						// Total up/round taxes and shipping taxes
-						// calc taxes as seen in WC_Cart->calculate_totals()
-						if ( $cart->round_at_subtotal ) {
-							$cart->tax_total          = $cart->tax->get_tax_total( $cart->taxes );
-						//	$cart->shipping_tax_total = $cart->tax->get_tax_total( $cart->shipping_taxes );
-							$cart->taxes              = array_map( array( $cart->tax, 'round' ), $cart->taxes );
-						//	$cart->shipping_taxes     = array_map( array( $cart->tax, 'round' ), $cart->shipping_taxes );
-						} else {
-							$cart->tax_total          = array_sum( $cart->taxes );
-						//	$cart->shipping_tax_total = array_sum( $cart->shipping_taxes );
-						}
-
-						// VAT exemption done at this point - so all totals are correct before exemption
-						if ( WC()->customer->is_vat_exempt() ) {
-							$cart->remove_taxes();
-						}
-						// ### END woocommerce tax recalculation ####
-
-						//*/
-						
-						/*
-						woocommerce is calculating the total from:
-							$cart->cart_contents_total 
-						+	$cart->tax_total 
-						+	$cart->shipping_tax_total 
-						+	$cart->shipping_total 
-						-	$cart->discount_total 
-						+	$cart->fee_total
-						
-						Adding a payment fee affects $cart->fee_total, $cart->tax_total and $cart->taxes.
-						so we need to (re-)calculate these values exactly the way woocommerce does.
-						
-						This is due to change.
-						*/
-						
-						//*/
 					}
 				}
 			}
 		}
 	}
-	function get_current_gateway(){
-		//*
+	function get_current_gateway() {
+		/**
+		 *	The Stripe for woocommerce plugin considers itself unavailable if cart total is below 50 ct.
+		 *	At this point the cart total is not yet calculated and equals zero resulting in s4wc being unavaliable.
+		 *	We use `WC()->payment_gateways->payment_gateways()` in favor of `WC()->payment_gateways->get_available_payment_gateways()`
+		 */
 		$available_gateways = WC()->payment_gateways->payment_gateways();
-		/*/
-		$available_gateways = WC()->payment_gateways->get_available_payment_gateways();
-		//*/
+
 		$current_gateway = null;
 		$default_gateway = get_option( 'woocommerce_default_gateway' );
 		if ( ! empty( $available_gateways ) ) {
