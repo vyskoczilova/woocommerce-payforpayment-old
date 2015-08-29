@@ -65,7 +65,7 @@ Handle if a payment fee on a specific payment method should be applied.
 
 Compatibility
 -------------
-- Tested up to WP 4.1 / WC 2.2.10
+- Tested up to WP 4.1 / WC 2.4
 - Requires at least WooCommerce 2.1
 - Not compatible with PayPal policy. Details: [PayPal User Agreement](https://www.paypal.com/webapps/mpp/ua/useragreement-full?country.x=US&locale.x=en_US#4), > "4.6 No Surcharges". You have been warned.
 
@@ -74,5 +74,3 @@ Support
 You like what you see? Maybe you already make some money with it? 
 Here are two options to keep me rocking:
 
-<a href="http://flattr.com/thing/3468992/mcguffinwoocommerce-payforpayment-on-GitHub" target="_blank"><img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a>
-<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=F8NKC6TCASUXE"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!" /></a>
