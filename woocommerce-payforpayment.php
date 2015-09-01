@@ -114,7 +114,7 @@ jQuery(document).ready(function($){
 				$chosen_methods=  WC()->session->get( 'chosen_shipping_methods' );
 				if (is_null($chosen_methods))
 				{
-				$chosen_methods=[];
+				$chosen_methods[]=null;
 				}
 				
 				if ( ! $disable_on_free_shipping || ! in_array( 'free_shipping' , $chosen_methods) ) {
