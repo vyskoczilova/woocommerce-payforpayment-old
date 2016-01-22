@@ -26,18 +26,19 @@ class Pay4Pay {
 			self::$_instance = new self();
 		return self::$_instance;
 	}
-	
+
 	public static function get_default_settings() {
 		return array(
 			'pay4pay_item_title' => __( 'Extra Charge' , 'woocommerce-payforpayment' ),
 			'pay4pay_charges_fixed' => 0,
 			'pay4pay_charges_percentage' => 0,
 			'pay4pay_disable_on_free_shipping' => 'no',
-			
+			'pay4pay_disable_on_zero_shipping' => 'no',
+
 			'pay4pay_taxes' => 'no',
 			'pay4pay_includes_taxes' => 'yes',
 			'pay4pay_tax_class' => '',
-			
+
 			'pay4pay_enable_extra_fees' => 'no',
 			'pay4pay_include_shipping' => 'no',
 			'pay4pay_include_coupons' => 'no',
@@ -53,11 +54,11 @@ class Pay4Pay {
 		add_action( 'admin_init' , array( &$this , 'check_wc_version' ) );
 		add_action( 'plugins_loaded' , array( &$this , 'load_textdomain' ) );
 	}
-	
+
 	function load_textdomain() {
 		load_plugin_textdomain( 'woocommerce-payforpayment' , false, dirname( plugin_basename( __FILE__ )) . '/languages' );
 	}
-	
+
 	function check_wc_version() {
 		if ( ! function_exists( 'WC' ) || version_compare( WC()->version , $this->required_wc_version ) < 0 ) {
 			deactivate_plugins( plugin_basename( __FILE__ ) );
@@ -65,7 +66,7 @@ class Pay4Pay {
 		}
 	}
 	public static function wc_version_notice() {
-		?><div class="error"><p><?php 
+		?><div class="error"><p><?php
 			_e('WooCommerce Pay4Payment requires at least WooCommerce 2.2. Please update!');
 		?></p></div><?php
 	}
@@ -78,16 +79,16 @@ jQuery(document).ready(function($){
 		$.ajax( $fragment_refresh );
 	});
 });
- 		</script><?php 
+ 		</script><?php
 	}
 	function add_pay4payment( $cart ) {
 		if ( ! is_null($this->_fee) ) {
-			$cart->add_fee( $this->_fee->fee_title , 
-							$this->_fee->cost , 
-							$this->_fee->taxable , 
+			$cart->add_fee( $this->_fee->fee_title ,
+							$this->_fee->cost ,
+							$this->_fee->taxable ,
 							$this->_fee->tax_class
 						);
-			
+
 		}
 	}
 	function calculate_pay4payment( ) {
@@ -96,8 +97,9 @@ jQuery(document).ready(function($){
 		}
 		if ( ( $current_gateway = $this->get_current_gateway() ) && ( $settings = $this->get_current_gateway_settings() ) ) {
 			$settings = wp_parse_args( $settings, self::get_default_settings() );
-			
+
 			$disable_on_free_shipping	= 'yes' == $settings['pay4pay_disable_on_free_shipping'];
+			$disable_on_zero_shipping	= 'yes' == $settings['pay4pay_disable_on_zero_shipping'];
 
 			$include_shipping			= 'yes' == $settings['pay4pay_include_shipping'];
 			$include_fees 				= 'yes' == $settings['pay4pay_enable_extra_fees'];
@@ -116,17 +118,20 @@ jQuery(document).ready(function($){
 				{
 				$chosen_methods[]=null;
 				}
-				
-				if ( ! $disable_on_free_shipping || ! in_array( 'free_shipping' , $chosen_methods) ) {
+
+				if (
+				(! $disable_on_free_shipping || ! in_array( 'free_shipping' , $chosen_methods))
+				&& (!$disable_on_zero_shipping || $cart->shipping_total > 0)
+				) {
 					$cost = floatval($settings['pay4pay_charges_fixed']);
-				
+
 					//  √ $this->cart_contents_total + √ $this->tax_total + √ $this->shipping_tax_total + $this->shipping_total + $this->fee_total,
 					$calculation_base = 0;
 					if ( $percent = floatval($settings['pay4pay_charges_percentage']) ) {
-						
-						
+
+
 						$calculation_base = $cart->subtotal_ex_tax;
-						
+
 						if ( $include_shipping )
 							$calculation_base += $cart->shipping_total;
 
@@ -135,36 +140,36 @@ jQuery(document).ready(function($){
 
 						if ( $include_coupons )
 							$calculation_base -= $cart->discount_total + $cart->discount_cart;
-						
+
 						if ( $include_cart_taxes ) {
 							$calculation_base += $cart->tax_total;
 							if ( $include_shipping )
 								$calculation_base += $cart->shipping_tax_total;
 						}
-						
+
 						$cost += $calculation_base * ($percent / 100 );
-						
+
 					}
-					
-					
+
+
 					$do_apply = $cost != 0;
 					$do_apply = apply_filters( "woocommerce_pay4pay_apply" , $do_apply , $cost , $calculation_base , $current_gateway );
 					$do_apply = apply_filters( "woocommerce_pay4pay_applyfor_{$current_gateway->id}" , $do_apply , $cost , $calculation_base , $current_gateway );
-					
+
 					if ( $do_apply ) {
 						// make our fee being displayed in the order total
 						$fee_title	= $settings['pay4pay_item_title'] ? $settings['pay4pay_item_title'] : $current_gateway->title;
 
-						$fee_title	= str_replace( 
-							array('[FIXED_AMOUNT]','[PERCENT_AMOUNT]','[CART_TOTAL]') , 
+						$fee_title	= str_replace(
+							array('[FIXED_AMOUNT]','[PERCENT_AMOUNT]','[CART_TOTAL]') ,
 							array(
-								strip_tags( wc_price( $settings['pay4pay_charges_fixed'] ) ) , 
-								floatval( $settings['pay4pay_charges_percentage'] ), 
-								strip_tags(wc_price($calculation_base)) , 
+								strip_tags( wc_price( $settings['pay4pay_charges_fixed'] ) ) ,
+								floatval( $settings['pay4pay_charges_percentage'] ),
+								strip_tags(wc_price($calculation_base)) ,
 							),
 							$fee_title );
 						$fee_id 	= sanitize_title( $fee_title );
-						
+
 						// apply min + max before tax calculation
 						// some people may like to use the plugin to apply a discount, so we need to handle negative values correctly
 						if ( $settings['pay4pay_charges_percentage'] ) {
@@ -173,7 +178,7 @@ jQuery(document).ready(function($){
 							$cost = max( $min_cost , $cost );
 							$cost = min( $max_cost , $cost );
 						}
-						
+
 						// WooCommerce Fee is always ex taxes. We need to subtract taxes, WC will add them again later.
 						if ( $taxable && $include_taxes ) {
 							$tax_rates = $cart->tax->get_rates( $tax_class );
@@ -182,11 +187,11 @@ jQuery(document).ready(function($){
 								$factor += $rate['rate']/100;
 							$cost /= $factor;
 						}
-						
-						
+
+
 						$cost = apply_filters( "woocommerce_pay4pay_{$current_gateway->id}_amount" , $cost , $calculation_base , $current_gateway , $taxable , $include_taxes , $tax_class );
 						$cost = round($cost,2);
-						
+
 						$this->_fee = (object) array(
 							'fee_title' => $fee_title,
 							'cost' => $cost,
@@ -211,7 +216,7 @@ jQuery(document).ready(function($){
 		$current_gateway = null;
 		$default_gateway = get_option( 'woocommerce_default_gateway' );
 		if ( ! empty( $available_gateways ) ) {
-			
+
 		   // Chosen Method
 			if ( isset( WC()->session->chosen_payment_method ) && isset( $available_gateways[ WC()->session->chosen_payment_method ] ) ) {
 				$current_gateway = $available_gateways[ WC()->session->chosen_payment_method ];
@@ -223,7 +228,7 @@ jQuery(document).ready(function($){
 		}
 		if ( ! is_null( $current_gateway ) )
 			return $current_gateway;
-		else 
+		else
 			return false;
 	}
 	function get_current_gateway_settings( ) {
@@ -234,7 +239,7 @@ jQuery(document).ready(function($){
 		}
 		return false;
 	}
-	
+
 	public function get_woocommerce_tax_classes() {
 		// I can't belive it really works like this!
 		$tax_classes = array_filter( array_map('trim', explode( "\n", get_option( 'woocommerce_tax_classes' ) ) ) );
