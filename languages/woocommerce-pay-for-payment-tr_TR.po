@@ -3,28 +3,25 @@ msgstr ""
 "Project-Id-Version: WooCommerce Pay for Payment v1.3.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: Thu Dec 18 2014 14:40:36 GMT+0100 (CET)\n"
-"Last-Translator: admin <joern@podpirate.org>\n"
+"PO-Revision-Date: 2016-05-01 15:33+0100\n"
+"Last-Translator: Jörn Lund <joern@podpirate.org>\n"
 "Language-Team: \n"
-"Language: Turkish\n"
-"Plural-Forms: nplurals=1; plural=0\n"
+"Language: tr\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Loco - https://localise.biz/\n"
-"X-Poedit-Language: \n"
-"X-Poedit-Country: \n"
+"X-Generator: Poedit 1.8.1\n"
 "X-Poedit-KeywordsList: _:1;gettext:1;dgettext:2;ngettext:1,2;dngettext:2,3;"
 "__:1;_e:1;_c:1;_n:1,2;_n_noop:1,2;_nc:1,2;__ngettext:1,2;__ngettext_noop:1,2;"
 "_x:1,2c;_ex:1,2c;_nx:1,2,4c;_nx_noop:1,2,3c;_n_js:1,2;_nx_js:1,2,3c;"
 "esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
 "esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
 "X-Poedit-Basepath: ../\n"
-"X-Poedit-Bookmarks: \n"
-"X-Poedit-SearchPath-0: .\n"
 "X-Textdomain-Support: yes\n"
-"X-Loco-Target-Locale: tr_TR"
+"X-Loco-Target-Locale: tr_TR\n"
+"X-Poedit-SearchPath-0: .\n"
 
 #. translators: plugin header field 'Author'
 #: woocommerce-payforpayment.php:0
@@ -51,8 +48,7 @@ msgctxt "Gateway list column"
 msgid "%s %% of cart totals"
 msgstr "Sepet toplamına oranı: %s %%"
 
-#: admin/class-pay4pay-admin.php:48
-#: admin/class-pay4pay-admin.php:256
+#: admin/class-pay4pay-admin.php:48 admin/class-pay4pay-admin.php:256
 #: woocommerce-payforpayment.php:34
 msgid "Extra Charge"
 msgstr "Ekstra Ücret"
@@ -111,8 +107,7 @@ msgstr "Ödeme ücretine vergiler dahildir."
 
 #: admin/class-pay4pay-admin.php:131
 msgid ""
-"If you leave this unchecked taxes will be calculated on top of the payment "
-"fee."
+"If you leave this unchecked taxes will be calculated on top of the payment fee."
 msgstr ""
 "Eğer işaretlenmemiş olarak bırakırsanız vergiler, ödeme ücreti üzerine "
 "hesaplanacaktır."
@@ -186,11 +181,10 @@ msgstr "En Düşük Ücret"
 
 #: admin/class-pay4pay-admin.php:84
 msgid ""
-"Minimum extra charge to be added to cart when this payment method is "
-"selected."
+"Minimum extra charge to be added to cart when this payment method is selected."
 msgstr ""
-"Bu ödeme yöntemi seçildiğinde sepet toplamına eklenecek en düşük ekstra "
-"ücret tutarıdır."
+"Bu ödeme yöntemi seçildiğinde sepet toplamına eklenecek en düşük ekstra ücret "
+"tutarıdır."
 
 #: admin/class-pay4pay-admin.php:92
 msgid "Charge at most"
@@ -198,8 +192,8 @@ msgstr "En Yüksek Ücret"
 
 #: admin/class-pay4pay-admin.php:94
 msgid ""
-"Maximum extra charge to be added to cart when this payment method is "
-"selected. Enter zero to disable."
+"Maximum extra charge to be added to cart when this payment method is selected. "
+"Enter zero to disable."
 msgstr ""
-"Bu ödeme yöntemi seçildiğinde sepet toplamına eklenecek en yüksek ekstra "
-"ücret tutarıdır. Devre dışı bırakmak için sıfır olarak girin."
+"Bu ödeme yöntemi seçildiğinde sepet toplamına eklenecek en yüksek ekstra ücret "
+"tutarıdır. Devre dışı bırakmak için sıfır olarak girin."

@@ -3,8 +3,8 @@ Contributors: podpirate
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QFR9BVRT6SEP6
 Tags: ecommerce, woocommerce, payment gateway, fee
 Requires at least: 3.5
-Tested up to: 4.3
-Stable tag: 1.3.7
+Tested up to: 4.5
+Stable tag: 1.3.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 WC requires at least: 2.2
@@ -92,6 +92,9 @@ Either post it on [GitHub](https://github.com/mcguffin/wp-access-areas) or—if 
 
 
 == Changelog ==
+
+= 1.3.7 =
+- l10n: change textdomain to 'woocommerce-pay-for-payment' to make it work with translate.wordpress.org
 
 = 1.3.6 =
 - Fixed compatibility with Amazon Payments and also with Woocommerce 2.4

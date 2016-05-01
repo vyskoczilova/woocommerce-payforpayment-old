@@ -3,7 +3,7 @@
 Plugin Name: WooCommerce Pay for Payment
 Plugin URI: http://wordpress.org/plugins/woocommerce-pay-for-payment
 Description: Setup individual charges for each payment method in woocommerce.
-Version: 1.3.7
+Version: 1.3.8
 Author: Jörn Lund
 Author URI: https://github.com/mcguffin
 License: GPL
@@ -29,7 +29,7 @@ class Pay4Pay {
 	
 	public static function get_default_settings() {
 		return array(
-			'pay4pay_item_title' => __( 'Extra Charge' , 'woocommerce-payforpayment' ),
+			'pay4pay_item_title' => __( 'Extra Charge' , 'woocommerce-pay-for-payment' ),
 			'pay4pay_charges_fixed' => 0,
 			'pay4pay_charges_percentage' => 0,
 			'pay4pay_disable_on_free_shipping' => 'no',
@@ -55,7 +55,7 @@ class Pay4Pay {
 	}
 	
 	function load_textdomain() {
-		load_plugin_textdomain( 'woocommerce-payforpayment' , false, dirname( plugin_basename( __FILE__ )) . '/languages' );
+		load_plugin_textdomain( 'woocommerce-pay-for-payment' , false, dirname( plugin_basename( __FILE__ )) . '/languages' );
 	}
 	
 	function check_wc_version() {
