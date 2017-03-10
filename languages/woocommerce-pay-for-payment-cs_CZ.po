@@ -1,0 +1,175 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce Pay for Payment v0.0.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-03-10 16:44+0100\n"
+"PO-Revision-Date: 2017-03-10 16:55+0100\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 2.0beta3\n"
+"X-Poedit-KeywordsList: _:1;gettext:1;dgettext:2;ngettext:1,2;dngettext:2,3;"
+"__:1;_e:1;_c:1;_n:1,2;_n_noop:1,2;_nc:1,2;__ngettext:1,2;"
+"__ngettext_noop:1,2;_x:1,2c;_ex:1,2c;_nx:1,2,4c;_nx_noop:1,2,3c;_n_js:1,2;"
+"_nx_js:1,2,3c;esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;"
+"esc_attr_x:1,2c;esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;"
+"transChoice:1,2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Textdomain-Support: yes\n"
+"Last-Translator: Karolína Vyskočilová <karolina@kybernaut.cz>\n"
+"Language: cs_CZ\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: admin/class-pay4pay-admin.php:48 admin/class-pay4pay-admin.php:256
+#: woocommerce-payforpayment.php:32
+msgid "Extra Charge"
+msgstr "Poplatek za platbu"
+
+#: admin/class-pay4pay-admin.php:54
+msgid "Item Title"
+msgstr "Název poplatku"
+
+#: admin/class-pay4pay-admin.php:56
+msgid "This will show up in the shopping basket."
+msgstr "Zobrazí se v nákupním košíku."
+
+#: admin/class-pay4pay-admin.php:60
+msgid "Fixed charge"
+msgstr "Pevný poplatek"
+
+#: admin/class-pay4pay-admin.php:62
+msgid "Extra charge to be added to cart when this payment method is selected."
+msgstr ""
+"Poplatek navíc, který bude přidán do košíku pokud bude vybrána tato "
+"platební metoda."
+
+#: admin/class-pay4pay-admin.php:69
+msgid "Percent charge"
+msgstr "Procentuální poplatek"
+
+#: admin/class-pay4pay-admin.php:71
+msgid "Percentage of cart total to be added to payment."
+msgstr "Procento z celkové ceny košíku, které se přidá k platbě."
+
+#: admin/class-pay4pay-admin.php:82
+msgid "Charge at least"
+msgstr "Nejméně"
+
+#: admin/class-pay4pay-admin.php:84
+msgid ""
+"Minimum extra charge to be added to cart when this payment method is "
+"selected."
+msgstr ""
+"Minimální poplatek, který bude přidán do košíku, když bude vybrána tato "
+"platební metoda."
+
+#: admin/class-pay4pay-admin.php:92
+msgid "Charge at most"
+msgstr "Maximálně"
+
+#: admin/class-pay4pay-admin.php:94
+msgid ""
+"Maximum extra charge to be added to cart when this payment method is "
+"selected. Enter zero to disable."
+msgstr ""
+"Maximální  poplatek, který bude přidán do košíku, když bude vybrána tato "
+"platební metoda."
+
+#: admin/class-pay4pay-admin.php:102
+msgid "Disable on Free Shipping"
+msgstr "Zakázat při dopravě zdarma"
+
+#: admin/class-pay4pay-admin.php:103
+msgid "Don’t charge this fee when free shipping is available."
+msgstr "Neuplatňovat poplatek pokud je k dispozici platba zdarma."
+
+#: admin/class-pay4pay-admin.php:114
+msgid "Extra Charge Taxes"
+msgstr "Poplatek za platbu DPH"
+
+#: admin/class-pay4pay-admin.php:119
+msgid "Taxable"
+msgstr "zdanitelný"
+
+#: admin/class-pay4pay-admin.php:121
+msgid "Payment fee is taxable"
+msgstr "Poplatek je zdanitelný"
+
+#: admin/class-pay4pay-admin.php:128
+msgid "Inclusive Taxes"
+msgstr "bez DPH"
+
+#: admin/class-pay4pay-admin.php:130
+msgid "The payment fee is inclusive of taxes."
+msgstr "Poplatek zahrnuje i DPH."
+
+#: admin/class-pay4pay-admin.php:131
+msgid ""
+"If you leave this unchecked taxes will be calculated on top of the payment "
+"fee."
+msgstr ""
+"Ponecháte-li toto pole prázdné, DPH bude připočítáno k poplatku za platbu."
+
+#: admin/class-pay4pay-admin.php:137
+msgid "Tax class"
+msgstr "Daňová třída"
+
+#: admin/class-pay4pay-admin.php:139
+msgid "Select a the tax class applied to the extra charge."
+msgstr "Vyberte daňovou třídu, která bude použita na poplatek."
+
+#: admin/class-pay4pay-admin.php:152
+msgid "Include in percental payment fee calculation:"
+msgstr "Zahrnout do kalkulace procentuálního poplatku"
+
+#: admin/class-pay4pay-admin.php:158
+msgid "Fees"
+msgstr "Poplatky"
+
+#: admin/class-pay4pay-admin.php:160
+msgid "Include fees in calculation."
+msgstr "Zahrnout poplatky při výpočtu."
+
+#: admin/class-pay4pay-admin.php:166
+msgid "Coupons"
+msgstr "Kupóny"
+
+#: admin/class-pay4pay-admin.php:168
+msgid "Include Coupons in calculation."
+msgstr "Zahrnout kupóny při výpočtu."
+
+#: admin/class-pay4pay-admin.php:174
+msgid "Shipping"
+msgstr "Doprava"
+
+#: admin/class-pay4pay-admin.php:176
+msgid "Include shipping cost in calculation."
+msgstr "Zahrnout cenu dopravy při výpočtu."
+
+#: admin/class-pay4pay-admin.php:185
+msgid "Taxes"
+msgstr "DPH"
+
+#: admin/class-pay4pay-admin.php:187
+msgid "Include taxes in calculation."
+msgstr "Zahrnout DPH při výpočtech."
+
+#: admin/class-pay4pay-admin.php:268
+#, php-format
+msgctxt "Gateway list column"
+msgid "%s %% of cart totals"
+msgstr "%s %% z ceny objednávky"
+
+#: woocommerce-payforpayment.php:69
+msgid ""
+"WooCommerce Pay4Payment requires at least WooCommerce 2.2. Please update!"
+msgstr ""
+"WooCommerce Pay4Payment vyžaduje alespoň WooCommerce 2.2. Prosím "
+"aktualizujte!"
+
+#: woocommerce-payforpayment.php:242
+msgid "Standard"
+msgstr "Standardní"
