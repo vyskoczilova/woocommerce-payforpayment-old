@@ -83,7 +83,7 @@ But you may use the WordPress Forum as well.
 
 = I found a bug and fixed it. How can I contribute? =
 
-Either post it on [GitHub](https://github.com/mcguffin/wp-access-areas) or—if you are working on a cloned repository—send me a pull request.
+Either post it on [GitHub](https://github.com/mcguffin/woocommerce-payforpayment) or—if you are working on a cloned repository—send me a pull request.
 
 
 == Screenshots ==
