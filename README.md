@@ -68,7 +68,7 @@ Handle if a payment fee on a specific payment method should be applied.
 
 Compatibility
 -------------
-- Tested up to WP 4.1 / WC 2.4
-- Requires at least WooCommerce 2.1
+- Tested up to WP 4.4 / WC 2.6
+- Requires at least WooCommerce 2.6
 - Not compatible with PayPal policy. Details: [PayPal User Agreement](https://www.paypal.com/webapps/mpp/ua/useragreement-full?country.x=US&locale.x=en_US#4), > "4.6 No Surcharges". You have been warned.
 

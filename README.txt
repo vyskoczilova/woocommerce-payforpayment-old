@@ -30,7 +30,7 @@ Requires at least woocommerce 2.2.
 
 = Features =
 - Fixed charge and/or a percentage of cart total
-- Translations in German, Spanish ([muchas graçias!](https://github.com/GosserBox)) and Turkish localization ([çok](https://www.transifex.com/accounts/profile/TRFlavourart/) [teşekkürler!](https://github.com/TRRF))
+- Translations in German, Spanish ([muchas graçias!](https://github.com/GosserBox)), Turkish ([çok](https://www.transifex.com/accounts/profile/TRFlavourart/) [teşekkürler!](https://github.com/TRRF)) and Czech localization ([díky](https://kybernaut.cz))
 - Plugin API. See [GitHub](https://github.com/mcguffin/woocommerce-payforpayment) for details.
 
 = Limitations =
@@ -92,6 +92,10 @@ Either post it on [GitHub](https://github.com/mcguffin/woocommerce-payforpayment
 
 
 == Changelog ==
+
+= unreleased =
+- plugin overtaken by @vyskoczilova
+- added Czech localization
 
 = 1.3.7 =
 - l10n: change textdomain to 'woocommerce-pay-for-payment' to make it work with translate.wordpress.org
@@ -167,4 +171,4 @@ Either post it on [GitHub](https://github.com/mcguffin/woocommerce-payforpayment
 
 
 == Upgrade notice ==
-Requires at least WooCommerce 2.2.
+Requires at least WooCommerce 2.6.
