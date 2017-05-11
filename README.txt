@@ -95,7 +95,9 @@ Either post it on [GitHub](https://github.com/mcguffin/woocommerce-payforpayment
 
 = unreleased =
 - plugin overtaken by @vyskoczilova
-- added Czech localization
+- ADDED Czech localization
+- ADDED Disable on zero shipping (by [@panvagenas](https://github.com/mcguffin/woocommerce-payforpayment/pull/35))
+- FIXED support for WC 2.6+ (by [@oerdnj](https://github.com/mcguffin/woocommerce-payforpayment/pull/42))
 
 = 1.3.7 =
 - l10n: change textdomain to 'woocommerce-pay-for-payment' to make it work with translate.wordpress.org
