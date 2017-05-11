@@ -98,6 +98,7 @@ jQuery(document).ready(function($){
 			$settings = wp_parse_args( $settings, self::get_default_settings() );
 			
 			$disable_on_free_shipping	= 'yes' == $settings['pay4pay_disable_on_free_shipping'];
+			$disable_on_zero_shipping	= 'yes' == $settings['pay4pay_disable_on_zero_shipping'];
 
 			$include_shipping			= 'yes' == $settings['pay4pay_include_shipping'];
 			$include_fees 				= 'yes' == $settings['pay4pay_enable_extra_fees'];
@@ -117,7 +118,7 @@ jQuery(document).ready(function($){
 				$chosen_methods[]=null;
 				}
 				
-				if ( ! $disable_on_free_shipping || ! in_array( 'free_shipping' , $chosen_methods) ) {
+				if ( (! $disable_on_free_shipping || ! in_array( 'free_shipping' , $chosen_methods)) && (!$disable_on_zero_shipping || $cart->shipping_total > 0) ) {
 					$cost = floatval($settings['pay4pay_charges_fixed']);
 				
 					//  √ $this->cart_contents_total + √ $this->tax_total + √ $this->shipping_tax_total + $this->shipping_total + $this->fee_total,

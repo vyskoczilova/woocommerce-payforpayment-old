@@ -218,7 +218,8 @@ class Pay4Pay_Admin {
 			'pay4pay_charges_percentage' 		=> floatval( $_POST[$prefix.'_pay4pay_charges_percentage'] ),
 			'pay4pay_charges_minimum'			=> floatval( $_POST[$prefix.'_pay4pay_charges_minimum'] ),
 			'pay4pay_charges_maximum'			=> floatval( $_POST[$prefix.'_pay4pay_charges_maximum'] ),
-			'pay4pay_disable_on_free_shipping'	=> $this->_get_bool( $prefix.'_pay4pay_disable_on_free_shipping' ), 
+			'pay4pay_disable_on_free_shipping'	=> $this->_get_bool( $prefix.'_pay4pay_disable_on_free_shipping' ),
+			'pay4pay_disable_on_zero_shipping'	=> $this->_get_bool( $prefix.'_pay4pay_disable_on_zero_shipping' ), 
 			
 			'pay4pay_taxes' 					=> $this->_get_bool( $prefix.'_pay4pay_taxes' ),
 			'pay4pay_includes_taxes'			=> $this->_get_bool( $prefix.'_pay4pay_includes_taxes'),
