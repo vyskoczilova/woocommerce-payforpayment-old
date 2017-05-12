@@ -1,16 +1,16 @@
 === WooCommerce Pay for Payment ===
-Contributors: podpirate
+Contributors: vyskoczilova, podpirate
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QFR9BVRT6SEP6
 Tags: ecommerce, woocommerce, payment gateway, fee
 Requires at least: 3.5
-Tested up to: 4.5
+Tested up to: 4.6
 Stable tag: 1.3.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 WC requires at least: 2.2
-WC tested up to: 2.4
+WC tested up to: 2.6+
 
-Setup individual charges for each payment method in woocommerce.
+Setup individual charges for each payment method in WooCommerce.
 
 
 == Description ==
@@ -26,18 +26,18 @@ You can use placeholders in the payment item title:
 - Example: `Payment Fee ([FIXED_AMOUNT] + [PERCENT_AMOUNT]% of [CART_TOTAL])`
 
 
-Requires at least woocommerce 2.2.
+Requires at least WooCommerce 2.6, compatible with WooCommerce 3.0+
 
 = Features =
 - Fixed charge and/or a percentage of cart total
-- Translations in German, Spanish ([muchas graçias!](https://github.com/GosserBox)) and Turkish localization ([çok](https://www.transifex.com/accounts/profile/TRFlavourart/) [teşekkürler!](https://github.com/TRRF))
-- Plugin API. See [GitHub](https://github.com/mcguffin/woocommerce-payforpayment) for details.
+- Translations in German, Spanish ([muchas graçias!](https://github.com/GosserBox)), Turkish ([çok](https://www.transifex.com/accounts/profile/TRFlavourart/) [teşekkürler!](https://github.com/TRRF)) and Czech localization ([díky](https://kybernaut.cz))
+- Plugin API. See [GitHub](https://github.com/vyskoczilova/woocommerce-payforpayment) for details.
 
 = Limitations =
 - Better not use it with paypal. (Legal issue, see FAQ as well.)
 
-Latest files on [GitHub](http://codex.wordpress.org/Managing_Plugins).
-
+= Special Credits =
+- to [Jörn Lund (@podipirate)](https://github.com/mcguffin/woocommerce-payforpayment) who have developed this plugin and abandoned it in 2016.
 
 == Installation ==
 
@@ -55,7 +55,7 @@ You have been warned.
 
 The plugin user interface only offers either a fixed amout or a percentage of the carts subtotal. 
 If you need to implement more complex calcuations like 'no charges for orders above 100 Bucks' or '2% of cart subtotal but at least 2 Bucks', 
-you'll have to use one of the filters. See [Plugin API](https://github.com/mcguffin/woocommerce-payforpayment#plugin-api) for details.
+you'll have to use one of the filters. See [Plugin API](https://github.com/vyskoczilova/woocommerce-payforpayment#plugin-api) for details.
 
 <code>woocommerce_pay4pay_apply</code> specifies if a charge will be applied.
 
@@ -78,12 +78,12 @@ Use the GitHub Repo rather than the WordPress Plugin. Do as follows:
 
 = I found a bug. Where should I post it? =
 
-I personally prefer GitHub, to keep things straight. The plugin code is here: [GitHub](https://github.com/mcguffin/woocommerce-payforpayment)
+I personally prefer GitHub, to keep things straight. The plugin code is here: [GitHub](https://github.com/vyskoczilova/woocommerce-payforpayment)
 But you may use the WordPress Forum as well.
 
 = I found a bug and fixed it. How can I contribute? =
 
-Either post it on [GitHub](https://github.com/mcguffin/wp-access-areas) or—if you are working on a cloned repository—send me a pull request.
+Either post it on [GitHub](https://github.com/vyskoczilova/woocommerce-payforpayment) or—if you are working on a cloned repository—send me a pull request.
 
 
 == Screenshots ==
@@ -92,6 +92,13 @@ Either post it on [GitHub](https://github.com/mcguffin/wp-access-areas) or—if 
 
 
 == Changelog ==
+
+= 2.0.0 =
+- plugin overtaken by [@vyskoczilova](https://github.com/vyskoczilova/woocommerce-payforpayment)
+- fully compatible with WC 3.0+
+- ADDED Czech localization
+- ADDED Disable on zero shipping (by [@panvagenas](https://github.com/mcguffin/woocommerce-payforpayment/pull/35))
+- FIXED support for WC 2.6+ (by [@oerdnj](https://github.com/mcguffin/woocommerce-payforpayment/pull/42))
 
 = 1.3.7 =
 - l10n: change textdomain to 'woocommerce-pay-for-payment' to make it work with translate.wordpress.org
@@ -124,7 +131,7 @@ Either post it on [GitHub](https://github.com/mcguffin/wp-access-areas) or—if 
 - Feature: Select tax class to be applied to payment fee
 - Feature: Select if cart taxes will be included on payment fee calculation
 - Feature: Placeholders in fee title.
-- Fixes: completely repeat all woocommerce tax and fee calculation steps after payment fee has been added. 
+- Fixes: completely repeat all WooCommerce tax and fee calculation steps after payment fee has been added. 
 
 = 1.2.5 =
 - Fix: incorrect fee calculation.
@@ -135,14 +142,14 @@ Either post it on [GitHub](https://github.com/mcguffin/wp-access-areas) or—if 
 = 1.2.2 =
 - Fix: [Calculate taxes](http://wordpress.org/support/topic/cant-use-the-plugin-generate-false-amount-in-adding)
 - Fix: cart contents taxes and shipping taxes included into fee calculation
-- Refactoring: Discard cart_has_fee() check, as it is already done by woocommerce
+- Refactoring: Discard cart_has_fee() check, as it is already done by WooCommerce
 
 = 1.2.1 =
 - Feature: [Calculate custom fee](http://wordpress.org/support/topic/not-calculating-custom-fees)
 
 = 1.2.0 =
 - Feature: add option to disable payment fee when free shipping is selected
-- Feature: add pay4pay column in woocommerce checkout settings
+- Feature: add pay4pay column in WooCommerce checkout settings
 - Plugin-API: add filter `woocommerce_pay4pay_apply`
 - Code Refactoring: separated admin UI from frontend to keep things lean.
 - Code Refactoring: use function <code>WC()</code> (available since WC 2.1) in favour of <code>global $woocommerce</code>.
@@ -166,5 +173,5 @@ Either post it on [GitHub](https://github.com/mcguffin/wp-access-areas) or—if 
 - Initial release
 
 
-== Upgrade notice ==
-Requires at least WooCommerce 2.2.
+== Upgrade Notice ==
+Now compatible with WooCommerce 2.6.+ & 3.0.+

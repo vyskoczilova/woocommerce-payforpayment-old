@@ -4,8 +4,8 @@ Plugin Name: WooCommerce Pay for Payment
 Plugin URI: http://wordpress.org/plugins/woocommerce-pay-for-payment
 Description: Setup individual charges for each payment method in woocommerce.
 Version: 1.3.8
-Author: Jörn Lund
-Author URI: https://github.com/mcguffin
+Author: Karolína Vyskočilová
+Author URI: https://kybernaut.cz
 License: GPL
 */
 
@@ -33,6 +33,7 @@ class Pay4Pay {
 			'pay4pay_charges_fixed' => 0,
 			'pay4pay_charges_percentage' => 0,
 			'pay4pay_disable_on_free_shipping' => 'no',
+			'pay4pay_disable_on_zero_shipping' => 'no',
 			
 			'pay4pay_taxes' => 'no',
 			'pay4pay_includes_taxes' => 'yes',
@@ -98,6 +99,7 @@ jQuery(document).ready(function($){
 			$settings = wp_parse_args( $settings, self::get_default_settings() );
 			
 			$disable_on_free_shipping	= 'yes' == $settings['pay4pay_disable_on_free_shipping'];
+			$disable_on_zero_shipping	= 'yes' == $settings['pay4pay_disable_on_zero_shipping'];
 
 			$include_shipping			= 'yes' == $settings['pay4pay_include_shipping'];
 			$include_fees 				= 'yes' == $settings['pay4pay_enable_extra_fees'];
@@ -117,7 +119,7 @@ jQuery(document).ready(function($){
 				$chosen_methods[]=null;
 				}
 				
-				if ( ! $disable_on_free_shipping || ! in_array( 'free_shipping' , $chosen_methods) ) {
+				if ( (! $disable_on_free_shipping || ! in_array( 'free_shipping' , $chosen_methods)) && (!$disable_on_zero_shipping || $cart->shipping_total > 0) ) {
 					$cost = floatval($settings['pay4pay_charges_fixed']);
 				
 					//  √ $this->cart_contents_total + √ $this->tax_total + √ $this->shipping_tax_total + $this->shipping_total + $this->fee_total,

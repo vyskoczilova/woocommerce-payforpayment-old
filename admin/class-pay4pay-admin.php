@@ -206,7 +206,12 @@ class Pay4Pay_Admin {
 	
 	function update_payment_options() {
 		global $current_section;
-		$class = new $current_section();
+		if ( version_compare( WC_VERSION, '2.6', '<' )) { 
+			$class = new $current_section();
+		} else {
+			$current_class = "WC_Gateway_" . $current_section;
+			$class = new $current_class();
+		}		
 		$prefix = 'woocommerce_'.$class->id;
 		$opt_name = $prefix.'_settings';
 		$options = get_option( $opt_name );
@@ -217,7 +222,8 @@ class Pay4Pay_Admin {
 			'pay4pay_charges_percentage' 		=> floatval( $_POST[$prefix.'_pay4pay_charges_percentage'] ),
 			'pay4pay_charges_minimum'			=> floatval( $_POST[$prefix.'_pay4pay_charges_minimum'] ),
 			'pay4pay_charges_maximum'			=> floatval( $_POST[$prefix.'_pay4pay_charges_maximum'] ),
-			'pay4pay_disable_on_free_shipping'	=> $this->_get_bool( $prefix.'_pay4pay_disable_on_free_shipping' ), 
+			'pay4pay_disable_on_free_shipping'	=> $this->_get_bool( $prefix.'_pay4pay_disable_on_free_shipping' ),
+			'pay4pay_disable_on_zero_shipping'	=> $this->_get_bool( $prefix.'_pay4pay_disable_on_zero_shipping' ), 
 			
 			'pay4pay_taxes' 					=> $this->_get_bool( $prefix.'_pay4pay_taxes' ),
 			'pay4pay_includes_taxes'			=> $this->_get_bool( $prefix.'_pay4pay_includes_taxes'),
