@@ -1,8 +1,7 @@
 WooCommerce Pay for Payment
 ===========================
 
-**Abandonware Notice:** Due to a pile of other projects, I am no longer capable of maintaining this plugin. 
-If somebody out there is willing to take over, I'd be glad to hand over the repository.
+**<s>Abandonware</s> Notice:** <s>Due to a pile of other projects, I am no longer capable of maintaining this plugin. If somebody out there is willing to take over, I'd be glad to hand over the repository.</s> Happily redirecting: [the new official repository](https://github.com/vyskoczilova/woocommerce-payforpayment). This repository will disapear or be handed over soonish.
 
 About
 -----
