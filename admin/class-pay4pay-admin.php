@@ -206,8 +206,12 @@ class Pay4Pay_Admin {
 	
 	function update_payment_options() {
 		global $current_section;
-		$current_class = "WC_Gateway_" . $current_section;
-		$class = new $current_class();
+		if ( version_compare( WC_VERSION, '2.6', '<' )) { 
+			$class = new $current_section();
+		} else {
+			$current_class = "WC_Gateway_" . $current_section;
+			$class = new $current_class();
+		}		
 		$prefix = 'woocommerce_'.$class->id;
 		$opt_name = $prefix.'_settings';
 		$options = get_option( $opt_name );
