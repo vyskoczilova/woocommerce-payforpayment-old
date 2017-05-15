@@ -178,7 +178,13 @@ jQuery(document).ready(function($){
 						
 						// WooCommerce Fee is always ex taxes. We need to subtract taxes, WC will add them again later.
 						if ( $taxable && $include_taxes ) {
-							$tax_rates = $cart->tax->get_rates( $tax_class );
+
+							if ( version_compare( WC_VERSION, '2.3', '<' )) { 
+								$tax_rates = $cart->tax->get_rates( $tax_class );
+							} else {
+								$tax_rates = WC_Tax::get_rates($tax_class);
+							}	
+
 							$factor = 1;
 							foreach ( $tax_rates as $rate )
 								$factor += $rate['rate']/100;

@@ -3,7 +3,7 @@ Contributors: vyskoczilova, podpirate
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QFR9BVRT6SEP6
 Tags: ecommerce, woocommerce, payment gateway, fee
 Requires at least: 3.5
-Tested up to: 4.6
+Tested up to: 4.6.7
 Stable tag: 1.3.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -37,7 +37,7 @@ Requires at least WooCommerce 2.6, compatible with WooCommerce 3.0+
 - Better not use it with paypal. (Legal issue, see FAQ as well.)
 
 = Special Credits =
-- to [Jörn Lund (@podipirate)](https://github.com/mcguffin/woocommerce-payforpayment) who have developed this plugin and abandoned it in 2016.
+- to [Jörn Lund (@podpirate)](https://github.com/mcguffin/woocommerce-payforpayment) who have developed this plugin and abandoned it in 2016.
 
 == Installation ==
 
@@ -99,6 +99,7 @@ Either post it on [GitHub](https://github.com/vyskoczilova/woocommerce-payforpay
 - ADDED Czech localization
 - ADDED Disable on zero shipping (by [@panvagenas](https://github.com/mcguffin/woocommerce-payforpayment/pull/35))
 - FIXED support for WC 2.6+ (by [@oerdnj](https://github.com/mcguffin/woocommerce-payforpayment/pull/42))
+- FIXED tax_rates notice (by [@javierrguez](https://wordpress.org/support/topic/error-wc_cart-tax/))
 
 = 1.3.7 =
 - l10n: change textdomain to 'woocommerce-pay-for-payment' to make it work with translate.wordpress.org
