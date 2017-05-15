@@ -1,6 +1,8 @@
 WooCommerce Pay for Payment
 ===========================
 
+[![plugin version](https://img.shields.io/wordpress/plugin/v/woocommerce-pay-for-paymayment.svg)](https://wordpress.org/plugins/woocommerce-pay-for-payment)
+
 About
 -----
 Add individual charges for each payment method as a flat rate and/or as a percentage of the cart total.
@@ -9,7 +11,7 @@ Coupons are not supported. (Sorry guys. I tried, but no way.)
 
 You will find a stable version in [WordPress plugin directory](http://wordpress.org/plugins/woocommerce-pay-for-payment/).
 
-Previous versions created by Jörn Lund, who abandoned this project due to a pile of other projects in 2016. Previous [GitHub](https://github.com/mcguffin/woocommerce-payforpayment) for details. The new version is maintained by Karolína Vyskočilová since 2017.
+Previous versions have been created by [Jörn Lund](https://github.com/mcguffin), who abandoned this project due to a pile of other projects in 2016. See the previous [GitHub](https://github.com/mcguffin/woocommerce-payforpayment) for details. The new version is maintained by Karolína Vyskočilová since 2017.
 
 Features
 --------
@@ -70,4 +72,3 @@ Compatibility
 - Tested up to WP 4.6.4 / WC 3.0.5
 - Requires at least WooCommerce 2.6, fully supports 3.0
 - Not compatible with PayPal policy. Details: [PayPal User Agreement](https://www.paypal.com/webapps/mpp/ua/useragreement-full?country.x=US&locale.x=en_US#4), > "4.6 No Surcharges". You have been warned.
-

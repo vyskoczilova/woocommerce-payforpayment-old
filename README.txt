@@ -8,7 +8,7 @@ Stable tag: 1.3.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 WC requires at least: 2.2
-WC tested up to: 2.6+
+WC tested up to: 3.0.5+
 
 Setup individual charges for each payment method in WooCommerce.
 
