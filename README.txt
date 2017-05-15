@@ -1,6 +1,6 @@
 === WooCommerce Pay for Payment ===
 Contributors: vyskoczilova, podpirate
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QFR9BVRT6SEP6
+Donate link: https://paypal.me/KarolinaVyskocilova/
 Tags: ecommerce, woocommerce, payment gateway, fee
 Requires at least: 3.5
 Tested up to: 4.6.7

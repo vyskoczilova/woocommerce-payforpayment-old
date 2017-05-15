@@ -113,10 +113,9 @@ jQuery(document).ready(function($){
 
 			if ( $settings['pay4pay_charges_fixed'] || $settings['pay4pay_charges_percentage'] ) {
 				$cart = WC()->cart;
-				$chosen_methods=  WC()->session->get( 'chosen_shipping_methods' );
-				if (is_null($chosen_methods))
-				{
-				$chosen_methods[]=null;
+				$chosen_methods =  WC()->session->get( 'chosen_shipping_methods' );
+				if (is_null($chosen_methods)) {
+					$chosen_methods[]=null;
 				}
 				
 				if ( (! $disable_on_free_shipping || ! in_array( 'free_shipping' , $chosen_methods)) && (!$disable_on_zero_shipping || $cart->shipping_total > 0) ) {
